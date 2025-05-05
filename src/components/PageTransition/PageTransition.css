@@ -1,0 +1,11 @@
+.page-transition {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+/* Remove any existing animation classes since we're using Framer Motion */ 
