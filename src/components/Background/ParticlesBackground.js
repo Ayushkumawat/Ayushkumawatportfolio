@@ -122,11 +122,20 @@ const ParticlesBackground = React.memo(() => {
     }), [darkMode]);
 
     return (
-        <div className="particles-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+        <div className="particles-container" style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            width: '100%', 
+            height: '100%', 
+            zIndex: 0,
+            pointerEvents: 'none'
+        }}>
             <Particles
                 id="tsparticles"
                 options={particleOptions}
                 init={particlesInit}
+                style={{ position: 'absolute', zIndex: 0 }}
             />
         </div>
     )

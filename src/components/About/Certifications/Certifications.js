@@ -17,11 +17,11 @@ const Certifications = () => {
 
   const certifications = [
     {
-      title: "IBM Certified Applied Data Science Capstone",
-      organization: "IBM",
-      date: "2023",
-      description: "This certification is a part of the IBM Certified Applied Data Science Capstone course, which is a part of the IBM Certified Applied AI Professional course.",
-      image: require('../../../images/certif/IBM.jpg'),
+      title: "AI Researcher",
+      organization: "Indian Space Research Organization, SAC, Ahemdabad",
+      date: "2024",
+      description: "I contributed to the development of real-time fault detection algorithms using machine learning on the Jetson AGX Orin platform.",
+      image: require('../../../images/certif/ISRO.jpg'),
       link: "#"
     },
     {
@@ -33,11 +33,11 @@ const Certifications = () => {
       link: "#"
     },
     {
-      title: "AI Researcher",
-      organization: "Indian Space Research Organization, SAC, Ahemdabad",
-      date: "2024",
-      description: "I contributed to the development of real-time fault detection algorithms using machine learning on the Jetson AGX Orin platform.",
-      image: require('../../../images/certif/ISRO.jpg'),
+      title: "IBM Applied Data Science Capstone",
+      organization: "IBM",
+      date: "2023",
+      description: "This certification is a part of the IBM Certified Applied Data Science Professional course.",
+      image: require('../../../images/certif/IBM.jpg'),
       link: "#"
     },
     {
@@ -58,7 +58,14 @@ const Certifications = () => {
     }
   ];
 
-  const cardsPerPage = 4;
+  // Set cards per page based on screen width
+  const width = window.innerWidth;
+  let cardsPerPage = 4;
+  if (width <= 999) {
+    cardsPerPage = 1;
+  } else if (width <= 1200) {
+    cardsPerPage = 3;
+  }
   const totalPages = Math.ceil(certifications.length / cardsPerPage);
 
   const handleNavigation = (direction) => {
@@ -165,6 +172,25 @@ const Certifications = () => {
           >
             <i className="fas fa-chevron-right"></i>
           </button>
+          
+          <div className="mobile-arrow-controls">
+            <button 
+              className="nav-arrow prev-arrow-mobile"
+              onClick={() => handleNavigation('prev')}
+              disabled={isAnimating}
+              aria-label="Previous certificates"
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+            <button 
+              className="nav-arrow next-arrow-mobile"
+              onClick={() => handleNavigation('next')}
+              disabled={isAnimating}
+              aria-label="Next certificates"
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
       {(isModalOpen || isClosing) && ReactDOM.createPortal(

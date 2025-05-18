@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Innovations.css';
 import { gsap } from 'gsap';
+import InnovationsMobile from './Innovations-mobile';
 
-export default function Innovations() {
+export default function Innovations({ isActive }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 999);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isEven, setIsEven] = useState(true);
   const innovationsRef = useRef(null);
@@ -16,6 +18,7 @@ export default function Innovations() {
   const cardContentsRef = useRef([]);
   const slideItemsRef = useRef([]);
   const [initialized, setInitialized] = useState(false);
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth > 999;
 
   // Project data
   const projects = [
@@ -72,12 +75,21 @@ export default function Innovations() {
   // Values for animations
   let offsetTop = 200;
   let offsetLeft = 700;
-  let cardWidth = 150;
-  let cardHeight = 220;
+  let cardWidth = window.innerWidth <= 998 ? 90 : 150;
+  let cardHeight = window.innerWidth <= 998 ? 130 : 220;
   let gap = 25;
   let numberSize = 50;
   const ease = "sine.inOut";
   let order = [0, 1, 2, 3, 4, 5];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 999);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Observe section visibility to lazy-init carousel
   useEffect(() => {
@@ -153,8 +165,10 @@ export default function Innovations() {
     pagination.className = 'pagination';
     pagination.id = 'pagination';
     pagination.innerHTML = `
-      <div class="arrow prev"><i class="fas fa-chevron-left"></i></div>
-      <div class="arrow next"><i class="fas fa-chevron-right"></i></div>
+      <div class="pagination-arrows">
+        <div class="arrow prev"><i class="fas fa-chevron-left"></i></div>
+        <div class="arrow next"><i class="fas fa-chevron-right"></i></div>
+      </div>
       <div class="progress-sub-container">
         <div class="progress-sub-background">
           <div class="progress-sub-foreground"></div>
@@ -316,8 +330,8 @@ export default function Innovations() {
     gsap.set(paginationRef.current, {
       top: offsetTop + 250,
       left: offsetLeft,
-      y: 200,
-      opacity: 0,
+      y: 0,
+      opacity: 1,
       zIndex: 60,
     });
 
@@ -326,9 +340,9 @@ export default function Innovations() {
     const navH = navEl ? navEl.offsetHeight : 0;
     gsap.set(`#card${active}`, {
       x: 0,
-      y: navH,
+      y: 0,
       width: window.innerWidth,
-      height: window.innerHeight - navH,
+      height: window.innerHeight,
     });
     
     // Hide content for main card
@@ -339,21 +353,40 @@ export default function Innovations() {
     gsap.set(detailsInactive, { opacity: 0, zIndex: 12 });
     
     // Hide all text elements initially for both active and inactive panels
-    gsap.set(`${detailsActive.id} .place-box .text`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsActive.id} .title-1`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsActive.id} .title-2`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsActive.id} .desc`, { y: 50, opacity: 0 });
-    gsap.set(`${detailsActive.id} .cta`, { y: 60, opacity: 0 });
+    // Helper function to safely set GSAP properties
+    const safeSet = (element, selector, props) => {
+      const target = element.querySelector(selector);
+      if (target) {
+        gsap.set(target, props);
+      }
+    };
 
-    gsap.set(`${detailsInactive.id} .place-box .text`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsInactive.id} .title-1`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsInactive.id} .title-2`, { y: 100, opacity: 0 });
-    gsap.set(`${detailsInactive.id} .desc`, { y: 50, opacity: 0 });
-    gsap.set(`${detailsInactive.id} .cta`, { y: 60, opacity: 0 });
+    // Set initial states for active panel
+    if (detailsActive) {
+      safeSet(detailsActive, '.place-box .text', { y: 100, opacity: 0 });
+      safeSet(detailsActive, '.title-1', { y: 100, opacity: 0 });
+      safeSet(detailsActive, '.title-2', { y: 100, opacity: 0 });
+      safeSet(detailsActive, '.desc', { y: 50, opacity: 0 });
+      safeSet(detailsActive, '.cta', { y: 60, opacity: 0 });
+    }
+
+    // Set initial states for inactive panel
+    if (detailsInactive) {
+      safeSet(detailsInactive, '.place-box .text', { y: 100, opacity: 0 });
+      safeSet(detailsInactive, '.title-1', { y: 100, opacity: 0 });
+      safeSet(detailsInactive, '.title-2', { y: 100, opacity: 0 });
+      safeSet(detailsInactive, '.desc', { y: 50, opacity: 0 });
+      safeSet(detailsInactive, '.cta', { y: 60, opacity: 0 });
+    }
 
     // Set progress bar
+    let progressBarWidth = 500;
+    if (window.innerWidth <= 480) progressBarWidth = 100;
+    else if (window.innerWidth <= 999) progressBarWidth = 150;
+    else if (window.innerWidth <= 992) progressBarWidth = 200;
+    else if (window.innerWidth <= 1400) progressBarWidth = 300;
     gsap.set(".progress-sub-foreground", {
-      width: 500 * (1 / order.length) * (active + 1),
+      width: progressBarWidth * (1 / order.length) * (active + 1),
     });
 
     // Position smaller cards
@@ -418,52 +451,62 @@ export default function Innovations() {
     });
     
     // Fade in the UI elements
-    gsap.to(paginationRef.current, { y: 0, opacity: 1, ease, delay: startDelay });
+    // gsap.to(paginationRef.current, { y: 0, opacity: 1, ease, delay: startDelay });
     gsap.to(detailsActive, { opacity: 1, x: 0, ease, delay: startDelay });
 
     // Initially populate details content
     updateDetailsContent(detailsActive, active);
 
     // Animate in the text elements of the initial slide
-    gsap.to(`#${detailsActive.id} .place-box .text`, {
-      y: 0,
-      opacity: 1,
-      delay: startDelay + 0.1,
-      duration: 0.5,
-      ease,
-    });
+    // Helper function to safely animate elements
+    const safeAnimate = (element, selector, props) => {
+      const target = element.querySelector(selector);
+      if (target) {
+        gsap.to(target, props);
+      }
+    };
 
-    gsap.to(`#${detailsActive.id} .title-1`, {
-      y: 0,
-      opacity: 1,
-      delay: startDelay + 0.15,
-      duration: 0.5,
-      ease,
-    });
+    if (detailsActive) {
+      safeAnimate(detailsActive, '.place-box .text', {
+        y: 0,
+        opacity: 1,
+        delay: startDelay + 0.1,
+        duration: 0.5,
+        ease,
+      });
 
-    gsap.to(`#${detailsActive.id} .title-2`, {
-      y: 0,
-      opacity: 1,
-      delay: startDelay + 0.2,
-      duration: 0.5,
-      ease,
-    });
+      safeAnimate(detailsActive, '.title-1', {
+        y: 0,
+        opacity: 1,
+        delay: startDelay + 0.15,
+        duration: 0.5,
+        ease,
+      });
 
-    gsap.to(`#${detailsActive.id} .desc`, {
-      y: 0,
-      opacity: 1,
-      delay: startDelay + 0.25,
-      duration: 0.4,
-      ease,
-    });
+      safeAnimate(detailsActive, '.title-2', {
+        y: 0,
+        opacity: 1,
+        delay: startDelay + 0.2,
+        duration: 0.5,
+        ease,
+      });
 
-    gsap.to(`#${detailsActive.id} .cta`, {
-      y: 0,
-      opacity: 1,
-      delay: startDelay + 0.3,
-      duration: 0.4,
-      ease,
-    });
+      safeAnimate(detailsActive, '.desc', {
+        y: 0,
+        opacity: 1,
+        delay: startDelay + 0.25,
+        duration: 0.4,
+        ease,
+      });
+
+      safeAnimate(detailsActive, '.cta', {
+        y: 0,
+        opacity: 1,
+        delay: startDelay + 0.3,
+        duration: 0.4,
+        ease,
+      });
+    }
   };
 
   // Update the details panel with current project information
@@ -534,8 +577,13 @@ export default function Innovations() {
       gsap.to(`#slide-item-${prv}`, { x: -numberSize, ease });
       
       // Update progress bar
+      let progressBarWidth = 500;
+      if (window.innerWidth <= 480) progressBarWidth = 100;
+      else if (window.innerWidth <= 999) progressBarWidth = 150;
+      else if (window.innerWidth <= 992) progressBarWidth = 200;
+      else if (window.innerWidth <= 1400) progressBarWidth = 300;
       gsap.to(".progress-sub-foreground", {
-        width: 500 * (1 / order.length) * (active + 1),
+        width: progressBarWidth * (1 / order.length) * (active + 1),
         ease,
       });
 
@@ -544,9 +592,9 @@ export default function Innovations() {
       const navH = navEl ? navEl.offsetHeight : 0;
       gsap.to(`#card${active}`, {
         x: 0,
-        y: navH,
+        y: 0,
         width: window.innerWidth,
-        height: window.innerHeight - navH,
+        height: window.innerHeight,
         borderRadius: 0,
         zIndex: 20,
         ease,
@@ -717,9 +765,18 @@ export default function Innovations() {
     if (newWindow) newWindow.opener = null;
   };
 
+  if (isMobile) {
+    return <InnovationsMobile projects={projects} />;
+  }
+
   return (
-    <section className='innovations-section' ref={innovationsRef}>
-      {/* Content is dynamically created in useEffect */}
+    <section className="innovations-section">
+      <div
+        ref={innovationsRef}
+        className={isActive && isDesktop ? 'fullscreen-innovations-content' : 'hidden-innovations-content'}
+      >
+        {/* Content is dynamically created in useEffect */}
+      </div>
     </section>
   );
 }

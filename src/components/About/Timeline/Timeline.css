@@ -1,6 +1,9 @@
 /* Remove global scrollbar hiding */
 html, body {
     /* Remove scrollbar hiding from here */
+    height: 100%; /* Ensure full height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
 }
 
 html::-webkit-scrollbar, 
@@ -12,10 +15,12 @@ body::-webkit-scrollbar {
     display: flex;
     position: relative;
     flex-direction: column;
-    height: fit-content;
+    height: auto;
+    min-height: 100%;
     margin-top: 0;
     padding-top: 2vh;
-    align-items: center;
+    align-items: stretch;
+    overflow-y: auto; /* Changed from visible to auto */
     /* Hide scrollbar but keep functionality */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;     /* Firefox */
@@ -46,9 +51,10 @@ body::-webkit-scrollbar {
     top: 0;
     width: 100%;
     height: auto;
+    min-height: 200%; /* Force content to be taller than container */
     align-items: center;
-    overflow: visible;
-    padding-bottom: 19vh;
+    overflow-y: visible; /* Ensure vertical scrolling works */
+    padding-bottom: 100px; /* Add padding at bottom */
 }
 
 .timeline::after { display: none; }
@@ -61,7 +67,7 @@ body::-webkit-scrollbar {
     transform: translateX(-50%);
     top: 0;
     height: 0;
-    transition: height 1s ease-out;
+    transition: height 0.8s ease-in-out;
     z-index: 0;
 }
 
@@ -70,27 +76,62 @@ body::-webkit-scrollbar {
     display: flex;
     padding: 10px 40px;
     position: relative;
-    width: 90%;
-    max-height: fit-content;
-    margin: 15px 0;
+    width: 100%;
+    max-width: 1600px;
+    min-height: 200px;
+    margin: 0px 0; /* Reduced from 40px to 25px for desktop */
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease;
+    transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform, opacity;
+}
+
+/* Enhanced animation for left and right containers */
+.left-container {
+    transform: translateX(-50px) translateY(50px);
+}
+
+.right-container {
+    transform: translateX(50px) translateY(50px);
 }
 
 .container.visible {
-        opacity: 1;
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+.left-container.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+.right-container.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+/* Add animation for timeline image */
+.container img {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s;
+}
+
+.container.visible img {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .left-container{
     display: flex;
     justify-content: flex-end;
+    padding-right: 0px;
 }
 
 .right-container{
     display: flex;
     justify-content: flex-start;
+    padding-left: 0px;
 }
 
 .container img{
@@ -116,7 +157,7 @@ body::-webkit-scrollbar {
 
 .text-box-left, .text-box-right {
     padding: 20px 30px;
-    width: 35%;
+    width: 48%;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     position: relative;
@@ -125,20 +166,49 @@ body::-webkit-scrollbar {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    z-index: 5;
+    margin-top: -5px;
+    overflow: visible;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    will-change: transform, opacity;
 }
 
-.text-box-left {
-    margin-right: 50px;
+/* Add animation for text boxes */
+.text-box-left, .text-box-right {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
 }
 
-.text-box-right {
-    margin-left: 50px;
+.container.visible .text-box-left,
+.container.visible .text-box-right {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.text-box-left::before, .text-box-right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(188, 194, 239, 0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 8px;
+}
+
+.text-box-left.gradient-active::before, .text-box-right.gradient-active::before {
+    opacity: 1;
 }
 
 .container:hover .text-box-left,
 .container:hover .text-box-right {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -177,16 +247,51 @@ body::-webkit-scrollbar {
 }
 
 .text-box-left p, .text-box-right p {
+    font-size: 1rem;
     line-height: 1.5;
     color: var(--text-color);
+}
+
+/* Add staggered animations for text content */
+.container .position,
+.container .company,
+.container small,
+.container p {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.container.visible .position {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.container.visible .company {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.container.visible small {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.container.visible p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
 }
 
 .left-arrow {
     height: 0;
     width: 0;
     position: absolute;
-    top: 28px;
-    z-index: 1;
+    top: 15px;
+    z-index: 6;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     border-left: 15px solid rgba(255, 255, 255, 0.1);
@@ -197,8 +302,8 @@ body::-webkit-scrollbar {
     height: 0;
     width: 0;
     position: absolute;
-    top: 28px;
-    z-index: 1;
+    top: 15px;
+    z-index: 6;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     border-right: 15px solid rgba(255, 255, 255, 0.1);
@@ -211,6 +316,22 @@ body::-webkit-scrollbar {
 
 .container:hover .right-arrow {
     border-right-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide timeline title on desktop screens */
+@media(min-width: 999px) {
+    .outer-timeline h1 {
+        display: none;
+    }
+    .outer-timeline {
+        margin-top: 56px;
+    }
+}
+
+@media(max-width: 1200px) {
+    .text-box-left, .text-box-right {
+        width: 40%;
+    }
 }
 
 @media(max-width: 998px) {
@@ -236,10 +357,11 @@ body::-webkit-scrollbar {
 
     .left-container, .right-container {
         justify-content: flex-start;
+        transform: translateX(0) translateY(50px);
     }
 
     .text-box-left, .text-box-right {
-        width: 80%;
+        width: 85%;
         margin-left: 70px;
         margin-right: 0;
     }
@@ -253,6 +375,10 @@ body::-webkit-scrollbar {
 
     .container:hover img {
         transform: translateY(-50%) scale(1.2);
+    }
+
+    .container.visible img {
+        transform: translateY(-50%) scale(1);
     }
 
     .left-arrow, .right-arrow {
@@ -270,16 +396,44 @@ body::-webkit-scrollbar {
 
 @media(max-width: 600px) {
     .outer-timeline {
-        padding-top: 1vh;
+        padding-top: 2.5rem;
+        padding-left: 0;
+        margin-left: 0;
+        margin-right: 0;
+        overflow-x: hidden;
+        overflow-y: auto; /* Enable vertical scrolling */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        height: auto; /* Allow height to grow */
+        min-height: 100%;
+        position: relative; /* Change from any fixed position */
+        -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
     }
 
     .timeline {
         margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: visible;
+        height: auto; /* Allow content to determine height */
+        min-height: 100%; /* Ensure full height for content */
+        position: relative; /* Ensure normal document flow */
+        touch-action: pan-y; /* Enable touch scrolling for y-axis */
     }
 
     .text-box-left, .text-box-right {
-        width: 80%;
-        margin-left: 60px;
+        width: 91%;
+        margin-left: 55px;
+        margin-right: 0;
+        padding: 15px;
+        z-index: 1;
+        box-sizing: border-box;
+        position: relative;
+        right: 0;
     }
 
     .outer-timeline h1 {
@@ -288,32 +442,126 @@ body::-webkit-scrollbar {
     }
 
     .container {
-        padding-left: 45px;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: visible; /* Allow content to overflow vertically */
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        min-height: 160px;
     }
 
     .text-box-left h2, .text-box-right h2,
     .text-box-left .position, .text-box-right .position {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
+        line-height: 1.3;
     }
 
     .text-box-left .company, .text-box-right .company {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
     }
 
     .text-box-left small, .text-box-right small {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        padding: 3px 2px;
+    }
+    
+    .text-box-left p, .text-box-right p {
+        font-size: 0.6rem;
+        line-height: 1.35;
+        letter-spacing: -0.1px;
     }
 
     .timeline-line {
-        left: 50px !important;
-        /* 20px (img left) + 30px (half img width) */
+        left: 25px !important; /* Center of the image (50px width ÷ 2) */
         transform: translateX(0) !important;
+        z-index: 1; /* Between image and content */
+        width: 4px; /* Slightly thinner for mobile */
+        pointer-events: none; /* Ensure line doesn't block scrolling/interactions */
     }
 
     .container img {
-        left: 20px !important;
-        width: 60px !important;
-        height: 60px !important;
+        position: absolute;
+        left: 0 !important;
+        width: 50px !important;
+        height: 50px !important;
         transform: translateY(-50%) !important;
+        margin-left: 0;
+        border-width: 2px;
+        z-index: 2;
+        background-color: #121212; /* Add background to ensure line doesn't show through */
+        pointer-events: none; /* Prevent images from blocking scrolling */
+    }
+    
+    body {
+        overflow-x: hidden;
+        overflow-y: auto; /* Ensure vertical scrolling works */
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .container::before {
+        left: 50px;
+    }
+}
+
+/* Add extra small device media query */
+@media(max-width: 480px) {
+    .text-box-left, .text-box-right {
+        width: 93%;
+        margin-left: 52px;
+        margin-right: 0;
+        padding: 12px;
+        right: 0;
+    }
+    
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        min-height: 140px;
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    
+    .text-box-left .position, .text-box-right .position {
+        font-size: 0.9rem;
+    }
+    
+    .text-box-left .company, .text-box-right .company {
+        font-size: 0.85rem;
+    }
+    
+    .text-box-left p, .text-box-right p {
+        font-size: 0.55rem;
+        line-height: 1.3;
+        letter-spacing: -0.1px;
+        word-spacing: -0.5px;
+    }
+    
+    .timeline-line {
+        left: 22.5px !important; /* Adjusted for smaller images (45px width ÷ 2) */
+    }
+    
+    .container img {
+        left: 0 !important;
+        width: 45px !important; /* Slightly smaller for extra small screens */
+        height: 45px !important;
+        margin-left: 0;
     }
 }

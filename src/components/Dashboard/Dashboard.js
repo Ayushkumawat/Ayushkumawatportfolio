@@ -42,8 +42,6 @@ export default function Dashboard({ currentSection }) {
     }
   }, [loading]);
 
-  if (loading) return <Loader />;
-
   // Animation variants for staggered cards
   const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
@@ -150,6 +148,7 @@ export default function Dashboard({ currentSection }) {
 
   return (
     <section className="dashboard-section">
+      {isVisible && loading && <Loader />}
       <div className={`dashboard-content ${isVisible ? 'visible' : ''}`}>
         <div className="dashboard-header">
           <h1>My <span>Dashboard</span></h1>

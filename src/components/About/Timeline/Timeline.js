@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import React, { useEffect, useRef, useState, useLayoutEffect, forwardRef } from 'react'
 import './Timeline.css'
 
-export default function Timeline() {
+const Timeline = forwardRef((props, ref) => {
   const [visibleItems, setVisibleItems] = useState({});
   const [maxVisibleIndex, setMaxVisibleIndex] = useState(-1);  // track highest visible block
   const [lineStart, setLineStart] = useState(0);             // pixel offset of first block center
   const [lineHeight, setLineHeight] = useState(0);           // dynamic line height
   const [lineActive, setLineActive] = useState(false);
   const containerRefs = useRef([]);
-  const timelineRef = useRef(null);
+  const internalTimelineRef = useRef(null);
+  const [animatedContainers, setAnimatedContainers] = useState({});
+  
+  // Use internal ref for component logic, but forward the ref for external use
+  const timelineRef = ref || internalTimelineRef;
 
   // Timeline data - moved to top before hooks use it
   const timelineItems = [
@@ -67,27 +71,64 @@ export default function Timeline() {
     containerRefs.current = Array(timelineItems.length).fill(null);
   }
 
-  // Observe each block for visibility and update maxVisibleIndex
+  // Enhanced Intersection Observer for lazy loading animation
   useEffect(() => {
+    // Create an IntersectionObserver with improved options for smoother animations
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
           const id = parseInt(entry.target.getAttribute('data-id'));
+          
+          // Only make items visible when they're intersecting (scrolled to)
           if (entry.isIntersecting) {
-            setVisibleItems(prev => ({ ...prev, [id]: true }));
-            setMaxVisibleIndex(prev => Math.max(prev, id));
-            // if first block, activate line after fade-in delay
-            if (id === 0) {
-              setTimeout(() => setLineActive(true), 800);
+            // Add delay proportional to the item index for staggered animation
+            setTimeout(() => {
+              setVisibleItems(prev => ({ ...prev, [id]: true }));
+              setMaxVisibleIndex(prev => Math.max(prev, id));
+              
+              // If first block, activate line with a delay
+              if (id === 0) {
+                setTimeout(() => setLineActive(true), 300);
+              }
+              
+              // Set a timer to mark this container as fully animated after animations finish
+              // This is longer than the animation duration to ensure everything is complete
+              setTimeout(() => {
+                setAnimatedContainers(prev => ({ ...prev, [id]: true }));
+              }, 1000);
+            }, 150); // Small delay for animation
+          } else {
+            // Hide items that are no longer in view and below current scroll position
+            // Don't hide items that have been scrolled past (above current view)
+            if (entry.boundingClientRect.y > window.innerHeight) {
+              setVisibleItems(prev => {
+                const newItems = { ...prev };
+                delete newItems[id];
+                return newItems;
+              });
+              
+              setAnimatedContainers(prev => {
+                const newItems = { ...prev };
+                delete newItems[id];
+                return newItems;
+              });
             }
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.2, // Slightly higher threshold to detect more clearly when images are visible
+        rootMargin: "0px 0px -10% 0px" // Start animation when more of the element is in view
+      }
     );
+    
+    // Observe all container elements
     containerRefs.current.forEach(el => el && observer.observe(el));
-    return () => containerRefs.current.forEach(el => el && observer.unobserve(el));
-  }, []);
+    
+    return () => {
+      containerRefs.current.forEach(el => el && observer.unobserve(el));
+    };
+  }, [timelineItems.length]);
 
   // Update the useLayoutEffect to measure position after animation completes
   useLayoutEffect(() => {
@@ -122,111 +163,123 @@ export default function Timeline() {
       return;
     }
 
-    // Store the animation delay
-    const animationDelay = 160; // ms - matches the animation duration
-    let lastMeasuredIndex = -1;
-    let animationTimeout = null;
-
-    // Continuously update line height on scroll for last item accuracy
+    // Continuously update line height on scroll for smooth line drawing
     const handleScroll = () => {
       const tlEl = timelineRef.current;
       if (!tlEl) return;
       const tlRect = tlEl.getBoundingClientRect();
-
-      // Find the position of the current highest visible logo
-      const visibleEl = containerRefs.current[maxVisibleIndex];
-      if (!visibleEl) return;
-
-      const visibleImgElement = visibleEl.querySelector('.timeline-image');
-      if (!visibleImgElement) return;
-
-      // Only measure newly visible elements after animation completes
-      if (maxVisibleIndex > lastMeasuredIndex) {
-        lastMeasuredIndex = maxVisibleIndex;
-        
-        // Clear any pending animation timeouts
-        if (animationTimeout) {
-          clearTimeout(animationTimeout);
-        }
-        
-        // Delay measurement until after animation completes
-        animationTimeout = setTimeout(() => {
-          handleScroll(); // Re-measure after animation
-          animationTimeout = null;
-        }, animationDelay);
-        
-        return; // Skip this measurement cycle, wait for timeout
+      
+      // Get all completely animated containers (those that have finished their animation)
+      const animatedIndices = Object.keys(animatedContainers)
+        .map(index => parseInt(index))
+        .sort((a, b) => a - b); // Sort indices numerically
+      
+      if (animatedIndices.length === 0) {
+        return; // No fully animated containers yet
       }
-
-      const visibleImgRect = visibleImgElement.getBoundingClientRect();
-      const visibleCenter = visibleImgRect.top - tlRect.top + visibleImgRect.height / 2;
-
-      // Always check the last logo position to stop the line there
-      const lastEl = containerRefs.current[timelineItems.length - 1];
-      if (!lastEl) return;
       
-      const lastImgElement = lastEl.querySelector('.timeline-image');
-      if (!lastImgElement) return;
+      // Get the last animated container
+      const lastAnimatedIndex = animatedIndices[animatedIndices.length - 1];
+      const lastAnimatedContainer = containerRefs.current[lastAnimatedIndex];
       
-      const lastImgRect = lastImgElement.getBoundingClientRect();
-      const lastCenter = lastImgRect.top - tlRect.top + lastImgRect.height / 2;
+      if (!lastAnimatedContainer) return;
       
-      // If the last block is coming into view (approaching half of viewport)
-      const viewportHeight = window.innerHeight;
-      const lastElRect = lastEl.getBoundingClientRect();
-      const lastElDistanceFromCenter = Math.abs((viewportHeight / 2) - (lastElRect.top + lastElRect.height / 2));
+      const imgElement = lastAnimatedContainer.querySelector('.timeline-image');
+      if (!imgElement) return;
       
-      // If the last element is nearing the center, prioritize ending at the last logo
-      if (lastElDistanceFromCenter < viewportHeight * 0.5 || maxVisibleIndex === timelineItems.length - 1) {
-        // Set line height to reach exactly to the last logo
-        setLineHeight(Math.max(lastCenter - lineStart, 0));
-      } else {
-        // Otherwise, follow the highest visible element
-        setLineHeight(Math.max(visibleCenter - lineStart, 0));
-      }
+      // Get the actual position after all animations have completed
+      const containerRect = lastAnimatedContainer.getBoundingClientRect();
+      const imgRect = imgElement.getBoundingClientRect();
+      
+      // Calculate the exact center of the image after animations
+      const imgCenterY = imgRect.top - tlRect.top + (imgRect.height / 2);
+      
+      // Calculate target height - from line start to the center of image
+      const targetHeight = Math.max(0, imgCenterY - lineStart);
+      
+      // Apply the line height
+      setLineHeight(targetHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
     
-    // Initial setup - wait for animation to complete before first measurement
-    const initialTimer = setTimeout(handleScroll, animationDelay);
-    
+    // Initial line height calculation
+    handleScroll();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(initialTimer);
-      if (animationTimeout) {
-        clearTimeout(animationTimeout);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [lineActive, lineStart, visibleItems, maxVisibleIndex, animatedContainers]);
+
+  // Add mouse move event listener for the vanilla tilt gradient effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Get all textboxes
+      const textBoxes = document.querySelectorAll('.text-box-left, .text-box-right');
+      
+      textBoxes.forEach(box => {
+        const boxRect = box.getBoundingClientRect();
+        // Calculate relative position of mouse inside the box (0-100%)
+        const x = Math.max(0, Math.min(100, ((e.clientX - boxRect.left) / boxRect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((e.clientY - boxRect.top) / boxRect.height) * 100));
+        
+        // Check if mouse is close to the element
+        const isNearBox = 
+          e.clientX >= boxRect.left - 100 && 
+          e.clientX <= boxRect.right + 100 && 
+          e.clientY >= boxRect.top - 100 && 
+          e.clientY <= boxRect.bottom + 100;
+        
+        if (isNearBox) {
+          // Apply the gradient based on mouse position
+          box.style.setProperty('--mouse-x', `${x}%`);
+          box.style.setProperty('--mouse-y', `${y}%`);
+          box.classList.add('gradient-active');
+        } else {
+          box.classList.remove('gradient-active');
+        }
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  // Function to reset visibility on scroll to top
+  useEffect(() => {
+    const handleScrollReset = () => {
+      // Reset animations when scrolling to top of page
+      if (window.scrollY < 100) {
+        setVisibleItems({});
+        setMaxVisibleIndex(-1);
+        setLineActive(false);
+        setLineHeight(0);
+        setAnimatedContainers({});
       }
     };
-  }, [maxVisibleIndex, lineActive, lineStart, timelineItems.length]);
-
-  // Reset when scrolling out of timeline section
-  useEffect(() => {
-    const resetObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          setMaxVisibleIndex(-1);
-          setVisibleItems({});
-          setLineActive(false);
-          setLineHeight(0);
-        }
-      },
-      { threshold: 0 }
-    );
-    if (timelineRef.current) resetObserver.observe(timelineRef.current);
-    return () => resetObserver.disconnect();
+    
+    window.addEventListener('scroll', handleScrollReset);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScrollReset);
+    };
   }, []);
 
   return (
-    <div className="outer-timeline">
-      <h1>Time<span>line</span></h1>
-      <div className='timeline' ref={timelineRef}>
+    <div className="outer-timeline" style={{ height: 'auto', minHeight: '100%', touchAction: 'pan-y' }}>
+      <div className='timeline' ref={timelineRef} style={{ paddingBottom: '200px' }}>
         <div
           className="timeline-line"
           style={{
             top: `${lineStart}px`,
             height: lineActive ? `${lineHeight}px` : '0px',
-            opacity: lineActive ? 1 : 0
+            opacity: lineActive ? 1 : 0,
+            transition: 'height 0.8s ease-in-out'
           }}
         ></div>
         {timelineItems.map((item, index) => {
@@ -237,6 +290,12 @@ export default function Timeline() {
               data-id={index}
               ref={el => containerRefs.current[index] = el}
               className={`container ${item.position}-container ${visibleItems[index] ? 'visible' : ''}`}
+              style={{ 
+                marginTop: index === 0 ? '10px' : '45px',
+                opacity: visibleItems[index] ? 1 : 0,
+                transform: `translateY(${visibleItems[index] ? '0px' : '50px'}) 
+                           translateX(${visibleItems[index] ? '0px' : (item.position === 'left' ? '-50px' : '50px')})`
+              }}
             >
               <img src={item.image} alt="" className="timeline-image" />
               <div className={`text-box-${item.position}`}>
@@ -252,4 +311,6 @@ export default function Timeline() {
       </div>
     </div>
   );
-}
+});
+
+export default Timeline;

@@ -9,85 +9,113 @@
   --bg-color: #04041a;
   --text-color: #bcc2ef;
   --main-color: #ff002f;
-  --navbar-height: 70px;
+  --main-color-rgb: 255, 0, 47;
+  --navbar-height: 90px;
 }
 
 html {
-  scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background: var(--bg-color);
   color: var(--text-color);
-  overflow-x: hidden;
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
 }
 
+/* Main container styles */
+.app-container {
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  position: relative;
+  z-index: 1;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  margin-top: var(--navbar-height);
+}
+
+.app-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Section styles */
 section {
-  min-height: 100vh;
-  padding: calc(var(--navbar-height) + 2rem) 2rem 2rem;
+  width: 100%;
+  height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height));
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow-x: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
 }
 
-/* Ensure content doesn't overflow */
-section > * {
-  max-width: 100%;
-  width: 100%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 998px) {
-  section {
-    padding: calc(var(--navbar-height) + 1rem) 1rem 1rem;
-  }
-}
-
-/* Ensure navbar stays on top */
+/* Navbar styles */
 .outer_nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: var(--navbar-height);
   z-index: 1000;
+  background-color: var(--bg-color);
 }
 
-/* Ensure content doesn't hide behind navbar */
-section:first-of-type {
-  padding-top: calc(var(--navbar-height) + 2rem);
+/* Particles background */
+.particles-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Smooth transitions */
-section {
-  transition: all 0.3s ease;
-}
-
-/* Ensure proper spacing for mobile menu */
+/* Mobile styles */
 @media (max-width: 998px) {
-  .navbar1_active {
+  .app-container {
     height: calc(100vh - var(--navbar-height));
+    -webkit-overflow-scrolling: touch;
+  }
+
+  section {
+    height: calc(100vh - var(--navbar-height));
+    min-height: calc(100vh - var(--navbar-height));
+    padding: 0;
+    width: 100%;
   }
 }
 
-/* Ensure particles background is fixed behind content */
-.particles-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+/* Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-/* Ensure main content is above the particles background */
-.app-container {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  z-index: 1;
-  overflow: hidden;
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
 }

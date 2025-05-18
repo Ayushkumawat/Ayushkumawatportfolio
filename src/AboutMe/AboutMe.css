@@ -1,73 +1,57 @@
-/* Dark card override - add to top of file */
-.dark-card {
-  background: linear-gradient(
-      135deg, 
-      rgba(31, 36, 45, 0.35) 0%, 
-      rgba(31, 36, 45, 0.2) 100%
-  ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  backdrop-filter: blur(20px) !important;
-  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3) !important;
-}
-
-.dark-card::before {
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 80%
-  ) !important;
-}
-
-.aboutme-content {
+.about-content{
     position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: auto;
+    height: fit-content;
     font-size: 1rem;
-    padding: 0;
-    overflow: visible;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    gap: 6%;
+    padding: 30px 5% 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: auto;
+    max-width: 1800px;
+    justify-content: space-between;
+    gap: 3%;
     z-index: 1;
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
-    border-radius: 0 !important;
-    max-width: 1400px;
 }
 
-.aboutme-content .card {
-    display: flex;
-    position: relative;
-    width: 30%;
-    min-width: 300px;
-    max-width: 380px;
-    height: 220px;
-    margin: 0;
-    flex-shrink: 0;
-    box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    background: rgba(31, 36, 45, 0.3);
-    background: linear-gradient(
-        135deg, 
-        rgba(31, 36, 45, 0.35) 0%, 
-        rgba(31, 36, 45, 0.2) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    z-index: 1;
-    align-self: center;
-    overflow: hidden;
-    transform: translateZ(0);
+.cont i{
+    margin-right: 10px;
 }
 
-.aboutme-content .card::before {
+.about-content::-webkit-scrollbar{display: none;}
+
+.about-content{
+    .card{
+        display: flex;
+        position: relative;
+        width: 30%;
+        min-width: 350px;
+        max-width: 450px;
+        height: 220px;
+        margin: 20px 0;
+        flex-shrink: 0;
+        box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        background: rgba(31, 36, 45, 0.3);
+        background: linear-gradient(
+            135deg, 
+            rgba(31, 36, 45, 0.35) 0%, 
+            rgba(31, 36, 45, 0.2) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        z-index: 1;
+        align-self: center;
+        margin-top: 50px;
+        overflow: hidden;
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
+.about-content .card::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -83,88 +67,108 @@
     z-index: 1;
 }
 
-.aboutme-content .card h1, 
-.aboutme-content .card h2, 
-.aboutme-content .card h3, 
-.aboutme-content .card h4, 
-.aboutme-content .card p, 
-.aboutme-content .card img,
-.aboutme-content .card i {
-    position: relative;
-    z-index: 2;
+.about-content{
+    .card h1, .card h2, .card h3, .card h4, .card p, .card img {
+        position: relative;
+        z-index: 2;
+    }
 }
 
-/* Card element positioning */
-.aboutme-content .card img,
-.aboutme-content .card i {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    width: 50px;
-    height: 45px;
+/* Fix for Safari */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+    .about-content .card {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
 }
 
-.aboutme-content .card h1 {
-    position: absolute;
-    top: 35px;
-    left: 25px;
-    color: #FF214F;
-    font-size: 1.9rem;
-    margin: 0;
+/* Fix for Firefox */
+@-moz-document url-prefix() {
+    .about-content .card {
+        background: rgba(31, 36, 45, 0.7);
+    }
 }
 
-.aboutme-content .card h2 {
-    position: absolute;
-    top: 80px;
-    left: 26px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-color);
-    text-decoration: underline;
-    margin: 0;
+@keyframes anime {
+    100%{
+        transform: translateY(10px);
+    }
 }
 
-.aboutme-content .card h3 {
-    position: absolute;
-    top: 115px;
-    left: 26px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
+.about-content{
+    .card img{
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 50px;
+        height: 45px;
+    }
 }
 
-.aboutme-content .card h4 {
-    position: absolute;
-    top: 135px;
-    left: 26px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
+.about-content{
+    .card h1{
+        position: absolute;
+        top: 35px;
+        left: 25px;
+        color: var(--main-color);
+    }
 }
 
-.aboutme-content .card p.contact-info {
-    position: absolute;
-    top: 170px;
-    left: 26px;
-    color: var(--text-color);
-    text-decoration: underline;
-    font-size: 0.85rem;
-    width: 90%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    letter-spacing: 0.02rem;
-    margin: 0;
+.about-content{
+    .card h2{
+        position: absolute;
+        top: 80px;
+        left: 26px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-decoration:underline;
+    }
+}
+
+.about-content{
+    .card h3{
+        position: absolute;
+        top: 120px;
+        left: 26px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.about-content{
+    .card h4{
+        position: absolute;
+        top: 135px;
+        left: 26px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.about-content{
+    .card p.contact-info{
+        position: absolute;
+        top: 180px;
+        left: 23px;
+        color: var(--text-color);
+        text-decoration:underline;
+        font-size: 0.85rem;
+        width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0.02rem;
+    }
 }
 
 .cont-wrapper {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 62%;
-    align-self: center;
+    max-width: 65%;
 }
 
 .cont {
@@ -175,158 +179,60 @@
     padding: 0;
 }
 
-.aboutme-content .heading {
-    font-size: 2.5rem;
-    margin: 0 0 1.8rem;
-    width: 100%;
-    padding: 0;
-    color: white;
-    font-weight: 600;
-    letter-spacing: 0.03rem;
+.about-content .heading{
     text-align: left;
-}
-
-.aboutme-content p {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin: 0 0 1rem;
     width: 100%;
-    margin: 0 0 1.2rem;
     padding: 0;
-    font-size: 1rem;
+}
+
+.about-content h2{
+    text-align: left;
+    line-height: 1.5;
+}
+
+.about-content p{
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0;
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.01rem;
 }
 
-.aboutme-content .btn {
-    display: inline-flex;
-    padding: 12px 25px;
-    color: white;
-    background-color: #FF214F;
-    border-radius: 50px;
-    box-shadow: 0 0 20px rgba(255, 33, 79, 0.5);
-    width: fit-content;
-    font-size: 1.1rem;
-    letter-spacing: 0.05rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin: 2.5rem 0 0;
-    text-decoration: none;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
+.about-content{
+    .btn {
+        display: block;
+        padding: 0.5rem 1.5rem;
+        color: var(--text-color);
+        background: var(--main-color);
+        border-radius: 4rem;
+        box-shadow: 0 0 0.5rem var(--text-color);
+        width: fit-content;
+        font-size: clamp(1rem, 1.2vw, 1.3rem);
+        letter-spacing: 0.05rem;
+        font-weight: 600;
+        transition: 0.5s ease;
+        margin: 1.5rem 0 1rem;
+        align-self: flex-start;
+        text-decoration: none;
+    }
 }
-
-.aboutme-content .btn i {
-    margin-right: 10px;
-    font-size: 1.2rem;
-}
-
-.aboutme-content .btn:hover {
-    box-shadow: 0 0 25px rgba(255, 33, 79, 0.8);
-    transform: translateY(-3px);
-    background-color: #ff0f40;
-}
-
-.aboutme-content .btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 0 15px rgba(255, 33, 79, 0.6);
-}
-
-/* Mobile styles */
-@media (max-width: 998px) {
-    .aboutme-content,
-    .aboutme-mobile,
-    .about-content,
-    .about-sections-stack {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-    .aboutme-content {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .aboutme-mobile {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-    .about-content {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-    .about-sections-stack {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-    .aboutme-content .heading,
-    .aboutme-mobile .heading {
-        margin-top: 0 !important;
-    }
-    .cont-wrapper {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-    .aboutme-content {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .aboutme-content .card {
-        order: 0;
-        width: 90%;
-        max-width: 380px;
-        margin: 0 auto 10px;
-        min-width: unset;
-    }
-    
-    .aboutme-content .heading {
-        text-align: center;
-        margin: 0 0 1rem;
-    }
-    
-    .aboutme-content p {
-        text-align: center;
-        line-height: 1.5;
-        margin: 0 0 0.8rem;
-        max-width: 100%;
-    }
-    
-    .aboutme-content .btn {
-        margin: 1rem auto;
+.about-content{
+    .btn:hover{
+        box-shadow: none;
+        color: var(--main-color);
+        background-color: var(--text-color);
     }
 }
 
-/* More mobile styles */
-@media (max-width: 480px) {
-    .aboutme-content .card {
-        height: auto;
-        padding-bottom: 60px;
-    }
-    
-    .aboutme-content .heading {
-        font-size: 1.8rem;
-        margin: 0 0 1.2rem;
-    }
-    
-    .aboutme-content p {
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-    
-    .aboutme-content .btn {
-        font-size: 0.95rem;
-        padding: 8px 20px;
-    }
-}
-
-/* Responsive media queries for the new class */
 @media (min-width: 1600px) {
-    .aboutme-content {
+    .about-content {
         padding: 30px 8% 0;
         gap: 5%;
     }
     
-    .aboutme-content .card {
+    .about-content .card {
         width: 25%;
         min-width: 400px;
         height: 240px;
@@ -336,18 +242,18 @@
         max-width: 70%;
     }
     
-    .aboutme-content p {
+    .about-content p {
         font-size: 1.1rem;
         line-height: 1.7;
     }
 }
 
 @media (max-width: 1200px) {
-    .aboutme-content {
+    .about-content {
         padding: 30px 3% 0;
     }
     
-    .aboutme-content .card {
+    .about-content .card {
         min-width: 320px;
         width: 35%;
     }
@@ -358,96 +264,35 @@
 }
 
 @media (max-width: 1024px) {
-    .aboutme-content {
-        padding: 0 3%;
-        gap: 4%;
-    }
-    
-    .aboutme-content .card {
-        min-width: 280px;
-        width: 30%;
-    }
-    
-    .cont-wrapper {
-        max-width: 60%;
-    }
-}
-
-/* Mobile styles */
-@media (max-width: 998px) {
-    .aboutme-content {
+    .about-content {
         flex-direction: column;
         align-items: center;
         padding: 20px 5% 0;
-        overflow-y: auto;
-        overflow-x: hidden;
     }
     
-    .aboutme-content .card,
-    .aboutme-mobile .card {
+    .about-content .card {
         width: 90%;
-        min-width: 0;
         max-width: 400px;
-        margin: 15px 0;
-        height: auto;
-        min-height: 180px;
-        background: linear-gradient(135deg, rgba(25, 28, 35, 0.3) 0%, rgba(18, 20, 25, 0.2) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        margin: 10px auto 30px;
     }
     
-    /* Center the content wrapper vertically between navbar and bottom */
     .cont-wrapper {
-        max-width: 100%;
-        width: 100%;
-        z-index: 20 !important;
-        height: auto;
-        margin: auto !important;
-        padding: 0 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        flex: 1;
+        max-width: 90%;
     }
     
-    .aboutme-content.aboutme-mobile.aboutme-centered-content .cont-wrapper {
-        margin: auto !important;
-    }
-    
-    /* Reset the absolute positioning for mobile view */
-    .aboutme-content.aboutme-mobile .cont-wrapper {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-    }
-    
-    /* Adjust paragraph for better readability when centered */
-    .aboutme-content.aboutme-mobile .cont p {
-        max-width: 85vw !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        text-align: center !important;
-    }
-
-    .aboutme-content .heading {
-        text-align: center;
-        margin: 1rem 0 1rem;
-    }
-    
-    .aboutme-content p {
+    .about-content .heading {
         text-align: center;
     }
     
-    .aboutme-content .btn {
-        margin: 1.5rem auto 1rem;
+    .about-content .btn {
         align-self: center;
+        margin: 2rem auto;
     }
 }
 
 .aboutme-mobile {
     margin-top: 0 !important;
+    padding-top: 2rem !important;
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
@@ -471,7 +316,7 @@
     bottom: 0 !important;
 }
 
-@media (max-width: 998px) {
+@media (max-width: 768px) {
     .about-content {
         flex-direction: column;
         align-items: center;
@@ -489,8 +334,6 @@
         margin: 15px 0;
         height: auto;
         min-height: 180px;
-        background: linear-gradient(135deg, rgba(25, 28, 35, 0.3) 0%, rgba(18, 20, 25, 0.2) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.06);
     }
     
     /* Center the content wrapper vertically between navbar and bottom */
@@ -537,10 +380,15 @@
         transform: none !important;
         transition: none !important;
         margin-bottom: 2rem !important;
-        background: linear-gradient(135deg, rgba(25, 28, 35, 0.3) 0%, rgba(18, 20, 25, 0.2) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
+        background: rgba(31, 36, 45, 0.3);
+        background: linear-gradient(
+            135deg, 
+            rgba(31, 36, 45, 0.35) 0%, 
+            rgba(31, 36, 45, 0.2) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
         box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
         overflow: hidden;
         transform: translateZ(0) !important;
@@ -558,7 +406,7 @@
         position: relative !important;
         z-index: 100 !important;
     }
-    
+
     .aboutme-mobile .card::before,
     .about-content .card::before {
         content: '';
@@ -569,8 +417,8 @@
         height: 200%;
         background: radial-gradient(
             circle at center,
-            rgba(255, 255, 255, 0.04) 0%,
-            rgba(255, 255, 255, 0) 70%
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0) 80%
         );
         pointer-events: none;
         z-index: 1;
@@ -711,7 +559,7 @@
         display: block !important;
     }
 
-    /* @media (max-height: 700px) {
+    @media (max-height: 700px) {
         .about-content {
             padding-top: max(3.5rem, calc(1.5rem + 3rem)) !important;
             justify-content: flex-start !important;
@@ -720,9 +568,9 @@
         .cont-wrapper {
             margin-top: 0.5rem !important;
         }
-    } */
+    }
     
-    /* @media (max-height: 600px) {
+    @media (max-height: 600px) {
         .about-content {
             padding-top: max(3rem, calc(1rem + 2.5rem)) !important;
             justify-content: flex-start !important;
@@ -731,9 +579,9 @@
         .cont-wrapper {
             margin-top: 0.3rem !important;
         }
-    } */
+    }
     
-    /* @media (max-height: 500px) {
+    @media (max-height: 500px) {
         .about-content {
             padding-top: max(2.5rem, calc(0.5rem + 2rem)) !important;
             justify-content: flex-start !important;
@@ -742,7 +590,7 @@
         .cont-wrapper {
             margin-top: 0.2rem !important;
         }
-    } */
+    }
 }
 
 @keyframes fadeIn {
@@ -834,7 +682,7 @@
 }
 
 /* Dynamic spacing for different screen heights in mobile view */
-/* @media (max-height: 800px) and (max-width: 998px) {
+@media (max-height: 800px) and (max-width: 768px) {
     .aboutme-mobile {
         padding-bottom: 2rem !important;
     }
@@ -846,9 +694,9 @@
     .aboutme-mobile .cont p {
         font-size: clamp(1rem, 2.8vw, 1.15rem) !important;
     }
-} */
+}
 
-/* @media (max-height: 650px) and (max-width: 998px) {
+@media (max-height: 650px) and (max-width: 768px) {
     .aboutme-mobile {
         padding-bottom: 1rem !important;
     }
@@ -866,9 +714,9 @@
         font-size: 1.8rem !important;
         margin: 0.3rem 0 1rem !important;
     }
-} */
+}
 
-@media (max-height: 550px) and (max-width: 998px) {
+@media (max-height: 550px) and (max-width: 768px) {
     .aboutme-mobile {
         padding-bottom: 0.5rem !important;
     }
@@ -895,13 +743,13 @@
 @supports not ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
     .about-content .card,
     .aboutme-mobile .card {
-        background: linear-gradient(135deg, rgba(25, 28, 35, 0.5) 0%, rgba(18, 20, 25, 0.4) 100%);
+        background: rgba(31, 36, 45, 0.75);
     }
     
-    @media(max-width:998px) {
+    @media(max-width:768px) {
         .about-content .card,
         .aboutme-mobile .card {
-            background: linear-gradient(135deg, rgba(25, 28, 35, 0.5) 0%, rgba(18, 20, 25, 0.4) 100%);
+            background: rgba(31, 36, 45, 0.75);
         }
     }
 }
@@ -910,7 +758,7 @@
 @-moz-document url-prefix() {
     .about-content .card,
     .aboutme-mobile .card {
-        background: linear-gradient(135deg, rgba(25, 28, 35, 0.5) 0%, rgba(18, 20, 25, 0.4) 100%);
+        background: rgba(31, 36, 45, 0.75);
     }
 }
 
@@ -958,7 +806,7 @@
 }
 
 /* Override for combined dimensions */
-/* @media (max-height: 700px) and (max-width: 480px) {
+@media (max-height: 600px) and (max-width: 480px) {
     .about-content.aboutme-mobile.aboutme-small.aboutme-short,
     .about-content.aboutme-mobile.aboutme-small.aboutme-very-short,
     .about-content.aboutme-mobile.aboutme-very-small.aboutme-short,
@@ -991,7 +839,7 @@
         font-size: 1.3rem !important;
         margin: 0.1rem 0 0.4rem !important;
     }
-} */
+}
 
 /* Mobile AboutMe spacing */
 .about-sections-stack .about-content.aboutme-mobile {
@@ -1026,12 +874,17 @@
   position: relative;
   box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
   border-radius: 15px;
-  background: linear-gradient(135deg, rgba(25, 28, 35, 0.3) 0%, rgba(18, 20, 25, 0.2) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(31, 36, 45, 0.3);
+  background: linear-gradient(
+      135deg, 
+      rgba(31, 36, 45, 0.35) 0%, 
+      rgba(31, 36, 45, 0.2) 100%
+  );
   display: flex;
   flex-direction: column;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   margin: 1vh auto;
   width: 90%;
   max-width: 600px;
@@ -1041,7 +894,7 @@
   transform: translateZ(0);
   will-change: transform;
   padding: 1rem 0.8rem;
-  transition: box-shadow 0.5s ease;
+  transition: backdrop-filter 0.5s ease, box-shadow 0.5s ease;
 }
 
 .aboutme-card::before {
@@ -1053,8 +906,8 @@
   height: 200%;
   background: radial-gradient(
       circle at center,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0) 70%
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 80%
   );
   pointer-events: none;
   z-index: 0;
@@ -1086,14 +939,14 @@
 /* Fix for Firefox and other browsers without backdrop-filter support */
 @supports not ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
   .aboutme-card {
-      background: linear-gradient(135deg, rgba(25, 28, 35, 0.5) 0%, rgba(18, 20, 25, 0.4) 100%);
+      background: rgba(31, 36, 45, 0.75);
   }
 }
 
 /* Firefox-specific fix */
 @-moz-document url-prefix() {
   .aboutme-card {
-      background: linear-gradient(135deg, rgba(25, 28, 35, 0.5) 0%, rgba(18, 20, 25, 0.4) 100%);
+      background: rgba(31, 36, 45, 0.75);
   }
 }
 
@@ -1206,14 +1059,14 @@
 }
 
 /* Adjustments for SectionNavBar spacing on small screens */
-@media (max-width: 430px) {
+@media (max-width: 360px) {
   .about-sections-stack {
     padding-top: 1rem !important;
   }
 }
 
 /* Ensure vertical centering works on very small screens */
-@media (max-height: 600px) and (max-width: 430px) {
+@media (max-height: 600px) and (max-width: 360px) {
   .about-sections-stack {
     display: flex !important;
     align-items: center !important;
@@ -1281,168 +1134,4 @@
 
 .section-nav-dot:hover {
   transform: scale(1.1);
-}
-
-/* The following is a more robust edit, ensuring to catch other potential overrides for .aboutme-mobile */
-
-@media (max-width: 998px) {
-    .aboutme-content.aboutme-mobile,
-    .aboutme-mobile,
-    .about-content.aboutme-mobile,
-    .aboutme-centered-content {
-        height: unset !important;
-        min-height: unset !important;
-        position: static !important;
-        overflow: visible !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        top: unset !important;
-        left: unset !important;
-        right: unset !important;
-        bottom: unset !important;
-        transform: none !important;
-    }
-
-    .aboutme-mobile .cont-wrapper,
-    .aboutme-centered-content .cont-wrapper {
-        position: static !important;
-        transform: none !important;
-        height: auto !important;
-        min-height: unset !important;
-        margin: 0 auto !important;
-        padding: 0 15px !important;
-    }
-
-    .aboutme-content.aboutme-mobile .cont p,
-    .aboutme-mobile .cont p,
-    .aboutme-centered-content .cont p {
-        max-width: 100% !important;
-        text-align: center !important;
-    }
-
-    .aboutme-mobile,
-    .aboutme-centered-content {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
-}
-
-.aboutme-mobile {
-    margin-top: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.aboutme-centered-content {
-    display: none !important;
-}
-
-/* Ensure font size classes like .aboutme-small, .aboutme-very-small, .aboutme-short etc. */
-/* PRIMARILY adjust font-size and related line-height/margins, NOT overall component height or position */
-.aboutme-small {
-    /* font-size: 1rem !important; // JS's getResponsiveFontSize should be primary */
-}
-.aboutme-small .heading { /* JS's getResponsiveFontSize should be primary */ }
-.aboutme-small .cont p { /* JS's getResponsiveFontSize should be primary */ }
-.aboutme-small .btn { /* JS's getResponsiveFontSize should be primary */ }
-
-.aboutme-very-small { /* Similar to above, JS font sizing is key */ }
-.aboutme-very-small .heading { }
-.aboutme-very-small .cont p { }
-.aboutme-very-small .btn { }
-
-/* Height-based styling classes like .aboutme-short, .aboutme-very-short */
-/* These should ideally only adjust internal paddings/margins or font specifics, */
-/* NOT the overall height (calc(100vh - 70px)) set by JS. */
-.aboutme-short {
-    /* padding-top: 0 !important; // Let JS handle padding on main div */
-}
-.aboutme-short .heading { /* font-size, margin fine if not causing overflow */ }
-.aboutme-short .cont p { /* line-height, margin fine */ }
-.aboutme-short .btn { /* font-size, padding, margin fine */ }
-
-.aboutme-very-short {
-    /* padding-top: 0 !important; */
-}
-.aboutme-very-short .heading { }
-.aboutme-very-short .cont p { }
-.aboutme-very-short .btn { }
-
-
-/* The .about-sections-stack rules seemed to enforce 100% height on .aboutme-mobile and its .cont-wrapper */
-/* This needs to be overridden if that class is active on the page */
-.about-sections-stack .about-content.aboutme-mobile,
-.about-sections-stack .about-content.aboutme-mobile .cont-wrapper {
-    height: unset !important;
-    min-height: unset !important;
-    position: static !important;
-    transform: none !important;
-    padding-top: 0 !important;
-    margin: 0 auto !important;
-}
-
-/* Remove duplicated @media (max-width: 998px) block if it's just a copy of the one at line 236 */
-/* The robust !important overrides placed earlier should handle conflicts from duplicated blocks. */
-
-/* Final check: Default .aboutme-content styles (lines 18-37) */
-/* .aboutme-content { height: auto; overflow: visible; } */
-/* The JS inline style for mobile (`height: calc(...)`, `overflow: hidden`) will override these defaults. */
-
-@media (max-width: 400px) {
-  .aboutme-content,
-  .aboutme-mobile,
-  .about-content {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-    font-size: 0.85rem !important;
-  }
-  .cont-wrapper {
-    max-width: 100% !important;
-    padding: 0 0px !important;
-    margin-top: 0 !important;
-  }
-  .aboutme-content .cont p,
-  .aboutme-mobile .cont p {
-    font-size: 0.9rem !important;
-    margin: 0rem 0 2rem 0 !important;
-    line-height: 1.22 !important;
-  }
-  .aboutme-content .btn,
-  .aboutme-mobile .btn {
-    font-size: 0.8rem !important;
-    padding: 0.4rem 1.5rem !important;
-    margin: 0rem auto 0 auto !important;
-  }
-}
-
-@media (min-width: 999px) and (max-height: 800px) {
-  .aboutme-content .card h1 {
-    font-size: 1.5rem !important;
-  }
-  .aboutme-content .card h2 {
-    font-size: 1.05rem !important;
-  }
-  .aboutme-content .card h3,
-  .aboutme-content .card h4 {
-    font-size: 0.7rem !important;
-  }
-  .aboutme-content .card p.contact-info {
-    font-size: 0.75rem !important;
-  }
-}
-
-@media (min-width: 999px) and (max-height: 650px) {
-  .aboutme-content .card h1 {
-    font-size: 1.2rem !important;
-  }
-  .aboutme-content .card h2 {
-    font-size: 0.9rem !important;
-  }
-  .aboutme-content .card h3,
-  .aboutme-content .card h4 {
-    font-size: 0.6rem !important;
-  }
-  .aboutme-content .card p.contact-info {
-    font-size: 0.65rem !important;
-  }
 }

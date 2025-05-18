@@ -120,11 +120,6 @@ const Achievements = () => {
   return (
     <div className="achievements-container">
       <div className="achievements-content">
-        {isMobile && (
-          <h2 className="achievements-title">
-            Achieve<span>ments</span>
-          </h2>
-        )}
         <div
           className="achievements-slider"
           onTouchStart={isMobile ? onTouchStart : undefined}
