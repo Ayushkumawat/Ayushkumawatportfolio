@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --bg-color: #04041a;
+  --text-color: #bcc2ef;
+  --main-color: #ff002f;
+  --navbar-height: 70px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+section {
+  min-height: 100vh;
+  padding: calc(var(--navbar-height) + 2rem) 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ensure content doesn't overflow */
+section > * {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 998px) {
+  section {
+    padding: calc(var(--navbar-height) + 1rem) 1rem 1rem;
+  }
+}
+
+/* Ensure navbar stays on top */
+.outer_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Ensure content doesn't hide behind navbar */
+section:first-of-type {
+  padding-top: calc(var(--navbar-height) + 2rem);
+}
+
+/* Smooth transitions */
+section {
+  transition: all 0.3s ease;
+}
+
+/* Ensure proper spacing for mobile menu */
+@media (max-width: 998px) {
+  .navbar1_active {
+    height: calc(100vh - var(--navbar-height));
+  }
+}
+
+/* Ensure particles background is fixed behind content */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Ensure main content is above the particles background */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+}

@@ -1,0 +1,344 @@
+.outer_nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--bg-color);
+}
+
+.navbar a.active {
+    color: var(--main-color);
+  }
+
+.section-navbar {
+    width: 100%;
+    height: var(--navbar-height);
+    background: rgba(31, 36, 45, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1001;
+}
+
+.section-navbar i {
+    display: none;
+    color: var(--main-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.section-navbar i:hover {
+    transform: scale(1.1);
+}
+
+.section-navbar .logo {
+    font-size: 1.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section-navbar .logo:hover {
+    color: var(--main-color);
+}
+
+.section-navbar .logo span {
+    color: var(--main-color);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: 0.5s ease;
+}
+
+@keyframes slideTop{
+    0%{
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    100%{
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
+.navbar1 {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(31, 36, 45, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    z-index: 1000;
+    justify-content: center;
+}
+
+.navbar1_active {
+    height: calc(100vh - var(--navbar-height));
+    padding: 2rem 0;
+}
+
+.navbar1 .btn {
+    margin: 1rem 0;
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--main-color);
+    border-radius: 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+    text-align: center;
+}
+
+.navbar1 .btn:hover,
+.navbar1 .btn.active {
+    background: var(--main-color);
+    color: var(--bg-color);
+}
+
+.navbar a {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--text-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    width: 100%;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+:root {
+    --toggleHeight: 14.5em;
+    --toggleWidth: 34em;
+    --toggleBtnRadius: 10em;  
+    --bgColor--night: #231c39;
+    --mooncolor: #ffffff;
+  }
+  
+body{
+    transition: all 0.7s ease-in-out;
+}
+
+.light{
+    background: var(--bg-color);
+}
+.tdnn {
+    display: flex;
+    font-size: 12%;
+    margin-top: 5px;
+    position: relative;
+    height: var(--toggleHeight);
+    width: var(--toggleWidth);
+    border-radius: var(--toggleHeight);
+    transition: all 700ms ease-in-out;
+    background: var(--bgColor--night);
+    cursor: pointer;
+}
+
+.day{
+    background: #c4dde2;
+}
+
+.moon {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    transition: all 400ms ease-in-out;    
+    top: 1.5em;
+    left: 2.7em;
+    transform: rotate(-75deg);
+    width: var(--toggleBtnRadius);
+    height: var(--toggleBtnRadius);
+    background: var(--bgColor--night);
+    box-shadow: 
+      3em 2.5em 0 0em var(--mooncolor) inset,
+      rgba(255, 255, 255, 0.66) 3em 7em 0 -4.5em,
+      rgba(255, 255, 255, 0.66) 2em 13em 0 -4em,
+      rgba(255, 255, 255, 0.66) 6em 2em 0 -4.1em,
+      rgba(255, 255, 255, 0.66) 8em 8em 0 -4.5em,
+      rgba(255, 255, 255, 0.66) 6em 13em 0 -4.5em,
+      rgba(255, 255, 255, 0.66) -4em 7em 0 -4.5em,
+      rgba(255, 255, 255, 0.66) -1em 10em 0 -4.5em,
+      rgba(255, 255, 255, 0.66) 5em 18em 0 -4.3em;
+      
+}
+
+root{
+--sun-col:#e9af31
+}
+
+.sun {
+    top: 3em;
+    left: 20em;
+    transform: rotate(0deg);
+    width: 7em;
+    height: 7em;
+    background: #fff;
+    box-shadow: 3em 3em 0 5em #e9af31 inset,
+      0 -5em 0 -2.7em #e9af31,
+      3.5em -3.5em 0 -3em #e9af31,
+      5em 0 0 -2.7em #e9af31,
+      3.5em 3.5em 0 -3em #e9af31,
+      0 5em 0 -2.7em #e9af31,
+      -3.5em 3.5em 0 -3em #e9af31,
+      -5em 0 0 -2.7em #e9af31,
+      -3.5em -3.5em 0 -3em #e9af31;
+}
+
+@media(max-width:998px){
+    .navbar{
+        display: none;
+    }
+    .section-navbar {
+        padding: 0 1.5rem;
+    }
+    .section-navbar i{
+        display: block;
+    }
+    .section-navbar .logo{
+        font-size: 1.4rem;
+    }
+    .navbar1 {
+        display: flex;
+    }
+    .navbar1 .btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 1rem auto;
+    }
+    .navbar1_active {
+        animation: fadeIn 0.4s ease both;
+    }
+    .navbar1_active .btn {
+        opacity: 0;
+        transform: translateY(-10px);
+        animation: fadeIn 0.5s ease forwards;
+    }
+    .navbar1_active .btn:nth-child(1) { animation-delay: 0.2s; }
+    .navbar1_active .btn:nth-child(2) { animation-delay: 0.3s; }
+    .navbar1_active .btn:nth-child(3) { animation-delay: 0.4s; }
+    .navbar1_active .btn:nth-child(4) { animation-delay: 0.5s; }
+    .navbar1_active .btn:nth-child(5) { animation-delay: 0.6s; }
+}
+
+/* Lazy loading animation styles */
+.navbar-hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.navbar-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.logo-animate {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.tdnn-animate {
+  animation: fadeIn 0.6s ease 0.2s forwards;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.icon-animate {
+  animation: fadeIn 0.6s ease 0.3s forwards;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.navbar-animate {
+  animation: slideDown 0.6s ease 0.4s forwards;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.link-animate {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+
+.link-delay-0 {
+  animation-delay: 0.5s;
+}
+
+.link-delay-1 {
+  animation-delay: 0.6s;
+}
+
+.link-delay-2 {
+  animation-delay: 0.7s;
+}
+
+.link-delay-3 {
+  animation-delay: 0.8s;
+}
+
+.link-delay-4 {
+  animation-delay: 0.9s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
