@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Contacts.css';
-import emailLogo from '../../images/logo/email.png';
-import whatsappLogo from '../../images/logo/WhatsApp.webp';
-import linkedinLogo from '../../images/logo/linkedin.png';
+
+const emailLogo = 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/logo/email.png';
+const whatsappLogo = 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/logo/WhatsApp.webp';
+const linkedinLogo = 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/logo/linkedin.png';
 
 export default function Contacts() {
   const [formData, setFormData] = useState({

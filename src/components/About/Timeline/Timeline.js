@@ -18,7 +18,7 @@ const Timeline = forwardRef((props, ref) => {
   const timelineItems = [
     {
       position: 'left',
-      image: require('../../../images/time/isro.jpg'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/isro.jpeg',
       jobTitle: 'Artificial Intelligence Researcher',
       company: 'Indian Space Research Organization, Ahmedabad',
       period: 'Aug 2024 - Dec 2024',
@@ -26,7 +26,7 @@ const Timeline = forwardRef((props, ref) => {
     },
     {
       position: 'right',
-      image: require('../../../images/time/google.png'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/google.png',
       jobTitle: 'AI - ML Intern',
       company: 'Google For Developers',
       period: 'Jan 2024 - Mar 2024',
@@ -34,7 +34,7 @@ const Timeline = forwardRef((props, ref) => {
     },
     {
       position: 'left',
-      image: require('../../../images/time/acm.jpg'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/acm.jpg',
       jobTitle: 'Chairperson',
       company: 'IAC SAGE ACM Student Chapter',
       period: 'Jun 2023 - Present',
@@ -42,7 +42,7 @@ const Timeline = forwardRef((props, ref) => {
     },
     {
       position: 'right',
-      image: require('../../../images/time/person.jpg'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/person.jpg',
       jobTitle: 'Machine Learning Intern',
       company: 'Personifwy',
       period: 'Aug 2022 - Nov 2022',
@@ -50,7 +50,7 @@ const Timeline = forwardRef((props, ref) => {
     },
     {
       position: 'left',
-      image: require('../../../images/time/sage.jpg'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/sage.jpg',
       jobTitle: 'B.Tech in AI & Data Science',
       company: 'Sage University, Indore',
       period: '2020 - 2024',
@@ -58,7 +58,7 @@ const Timeline = forwardRef((props, ref) => {
     },
     {
       position: 'right',
-      image: require('../../../images/time/school.png'),
+      image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/time/school.jpeg',
       jobTitle: 'Higher Secondary Education',
       company: 'Guru Ramdas Public School',
       period: '2019 - 2020',

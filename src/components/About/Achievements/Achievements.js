@@ -186,49 +186,49 @@ const Achievements = () => {
 
 const achievementsData = [
   {
-    image: require('../../../images/achive/Jetson.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/Jetson.jpeg',
     date: 'NVIDIA',
     title: 'AI Specialist',
     text: 'I am proud to hold the Jetson AI Specialist certificate from NVIDIA, which recognizes my expertise in developing AI applications for edge devices using the powerful NVIDIA Jetson platform. This showcases my potential in areas such as computer vision, machine learning, deep learning frameworks, and deploying AI models on edge devices. With this credential, I am equipped to create intelligent solutions for industries such as robotics, computer vision, and autonomous systems.',
   },
   {
-    image: require('../../../images/achive/sage.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/sage.jpg',
     date: 'Sage University Indore',
     title: 'Academic Excellence Award',
     text: 'Received the Academic Excellence Award from Sage University in Recognition of Outstanding Performance in all Academic Categories during my B.Tech. Degree.',
   },
   {
-    image: require('../../../images/achive/hack.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/hack.jpeg',
     date: 'Google | AMD | GeeksforGeeks',
     title: 'Hackathon Winner',
     text: 'I am delighted to spotlight my accomplishment in the Institute-Level Hackathon, a collaborative initiative by industry giants Google Cloud, AMD, and esteemed programming community GeeksforGeeks (GFG). Through rigorous competition and unwavering determination, my team and I succeeded in crafting a compelling solution that exemplified our prowess in cloud computing, advanced hardware, and innovative problem-solving.',
   },
   {
-    image: require('../../../images/achive/patent1.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/patent1.jpeg',
     date: 'Intellectual Property India',
     title: 'Patent - Voice Automated Virtual Ordering System',
     text: "Another significant achievement in my technological journey – the publication of my patent on a revolutionary Voice-Automated Table Service System. This innovative system redefines the dining experience by introducing a hands-free approach to menu selection and ordering. Designed to seamlessly integrate cutting-edge voice recognition technology, this system empowers diners to engage with menus and place orders effortlessly, without the need for traditional menus or direct human interaction.",
   },
   {
-    image: require('../../../images/achive/patent2.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/patent2.jpeg',
     date: 'Intellectual Property India',
     title: 'Patent - A System for Identifying Threats in Surveillance Systems',
-    text: "Another significant achievement in my technological journey – the publication of my patent on a revolutionary Voice-Automated Table Service System. This innovative system redefines the dining experience by introducing a hands-free approach to menu selection and ordering. Designed to seamlessly integrate cutting-edge voice recognition technology, this system empowers diners to engage with menus and place orders effortlessly, without the need for traditional menus or direct human interaction.",
+    text: "Proud to announce another major innovation in my tech journey – the publication of my patent titled “A System and Method for Identifying a Threat in Surveillance Systems.” This system introduces an AI-powered solution designed to enhance security through real-time threat detection. By analyzing test images using advanced AI modules, the system identifies suspicious elements in surveillance footage and outputs confidence-rated threat assessments. This breakthrough significantly improves monitoring efficiency and can be integrated into modern smart surveillance infrastructures to bolster safety and response measures.",
   },
   {
-    image: require('../../../images/achive/chess.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/chess.jpg',
     date: 'District Chess Association',
     title: 'Chess Player',
     text: "I am proud to have secured a prominent position at the district-level chess competition, showcasing my strategic prowess and dedication to the game. Emerging successfully in this challenging competition stands as a testament to my strategic thinking and determination, motivating me to pursue excellence in chess and beyond.",
   },
   {
-    image: require('../../../images/achive/rollball.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/rollball.jpg',
     date: 'State-Level Competition',
     title: 'Roll Ball Player',
     text: 'Having the privilege to compete in the state-level Rollball tournament was a defining moment in my athletic journey. Representing my region at this level was a testament to my dedication to the sport and my commitment to honing my skills.',
   },
   {
-    image: require('../../../images/achive/softball.jpg'),
+    image: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/achive/softball.jpg',
     date: 'State-Level Competition',
     title: 'Soft Ball Player',
     text: 'Participating in the state-level Softball competition was an exhilarating experience that showcased my athletic prowess and team spirit. As a dedicated player, I showcased my skills in throwing, catching, and teamwork on a larger stage, representing my region with pride.',

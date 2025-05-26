@@ -140,7 +140,7 @@ export default function Home({ setCurrentSection }) {
       <div className='home-section'>
         <div className='home-img'>
           <motion.img
-            src={require('../../images/IMG.png')}
+            src={'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/IMG.png'}
             alt='Profile'
             initial={{ opacity: 0, rotateY: 15, rotateZ: -10, scale: 0.8 }}
             animate={imageControls}

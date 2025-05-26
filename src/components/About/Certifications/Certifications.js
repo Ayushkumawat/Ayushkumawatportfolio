@@ -21,7 +21,7 @@ const Certifications = () => {
       organization: "Indian Space Research Organization, SAC, Ahemdabad",
       date: "2024",
       description: "I contributed to the development of real-time fault detection algorithms using machine learning on the Jetson AGX Orin platform.",
-      image: require('../../../images/certif/ISRO.jpg'),
+      image: "https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/certif/ISRO.jpg",
       link: "#"
     },
     {
@@ -29,7 +29,7 @@ const Certifications = () => {
       organization: "IELTS",
       date: "2024",
       description: "Qualified in the IELTS exam with an overall score of 7.5",
-      image: require('../../../images/certif/IELTS.jpg'),
+      image: "https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/certif/IELTS.jpg",
       link: "#"
     },
     {
@@ -37,7 +37,7 @@ const Certifications = () => {
       organization: "IBM",
       date: "2023",
       description: "This certification is a part of the IBM Certified Applied Data Science Professional course.",
-      image: require('../../../images/certif/IBM.jpg'),
+      image: "https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/certif/IBM.jpg",
       link: "#"
     },
     {
@@ -45,7 +45,7 @@ const Certifications = () => {
       organization: "NPTEL",
       date: "2023",
       description: "Earned an 'Elite' certification from NPTEL-IIT Madras for clearing the exam for 8-week course on Programming, Data Structures, and Algorithms using Python.",
-      image: require('../../../images/certif/NPTEL.jpg'),
+      image: "https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/certif/NPTEL.jpg",
       link: "#"
     },
     {
@@ -53,7 +53,7 @@ const Certifications = () => {
       organization: "GUVI",
       date: "2022",
       description: "Comprehensive certification in Full Stack Web Development",
-      image: require('../../../images/certif/guvi.jpg'),
+      image: "https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/certif/guvi.jpg",
       link: "#"
     }
   ];

@@ -252,7 +252,7 @@ export default function AboutMe() {
           animate={isLoaded ? "visible" : "hidden"}
           exit="exit"
         >
-          <img src={require('../../../images/favicon.jpg')}  alt=''></img>
+          <img src={'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/favicon.jpg'}  alt=''></img>
           <h1>Ayush Kumawat</h1>
           <h2>AI Researcher</h2>
           <h3>Indian Space Research Organization, Ahmedabad</h3>

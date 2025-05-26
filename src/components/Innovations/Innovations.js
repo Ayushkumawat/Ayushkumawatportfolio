@@ -26,15 +26,15 @@ export default function Innovations({ isActive, changeSection, currentSection })
       title: 'AI MED',
       title2: 'DIAGNOSIS',
       description: 'AI MedDiagnostics is a web-based application that allows users to track their symptoms and predict the likelihood of having a disease based on their symptoms.',
-      imageUrl: require('../../images/proj/proj_1.png'),
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_1.png',
       githubLink: 'https://github.com/Ayushkumawat/AI-MedDiagnostics',
     },
     {
       category: 'IoT & Transportation',
       title: 'BUS PASSENGER',
       title2: 'MANAGEMENT',
-      description: 'Bus-Passenger-Management will help in digitalizing local transportation system by providing QR code to consumers, it will help in managing user data by excel sheets.',
-      imageUrl: require('../../images/proj/proj_2.png'),
+      description: 'Bus-Passenger-Management will help in digitalizing local transportation system by providing QR code to consumers, it will help in managing user data by creating excel sheets.',
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_2.png',
       githubLink: 'https://github.com/Ayushkumawat/Bus-Passenger-Management-using-Smart-Card-Technology',
     },
     {
@@ -42,7 +42,7 @@ export default function Innovations({ isActive, changeSection, currentSection })
       title: 'FACIAL',
       title2: 'RECOGNITION',
       description: 'This project helps in real time facial recognition and gender detection. It uses only single clear image of person to detect and make predictions.',
-      imageUrl: require('../../images/proj/proj_3.png'),
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_3.png',
       githubLink: 'https://github.com/Ayushkumawat/Facial-Recognition-with-Gender-Detection',
     },
     {
@@ -50,7 +50,7 @@ export default function Innovations({ isActive, changeSection, currentSection })
       title: 'AERIAL DRONE',
       title2: 'DETECTION',
       description: 'This project demonstrates real-time drone detection using YOLOv5 and OpenCV. It detects drones in real-time and displays a warning when a drone is detected inside or near a defined rectangle.',
-      imageUrl: require('../../images/proj/proj_4.png'),
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_4.png',
       githubLink: 'https://github.com/Ayushkumawat/Advanced-Aerial-Drone-Detection-System',
     },
     {
@@ -58,7 +58,7 @@ export default function Innovations({ isActive, changeSection, currentSection })
       title: 'Number Plate',
       title2: 'Detection',
       description: 'This project uses custom trained YOLO models to detect and recognize number plates in real-time. It provides a bounding box when a number plate is detected and stores the data in a excel sheet.',
-      imageUrl: require('../../images/proj/proj_5.png'),
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_5.png',
       githubLink: 'https://github.com/Ayushkumawat/Number-Plate-Detection-Advanced-using-Python',
     },
     {
@@ -66,7 +66,7 @@ export default function Innovations({ isActive, changeSection, currentSection })
       title: 'RESTAURANT',
       title2: 'ORDERING',
       description: 'In this project we developed a system to automate the ordering & billing process in resturants. I also got a patent on this.',
-      imageUrl: require('../../images/proj/proj_6.png'),
+      imageUrl: 'https://raw.githubusercontent.com/Ayushkumawat/Ayushkumawatportfolio/refs/heads/main/src/images/proj/proj_6.png',
       githubLink: 'https://www.github.com/Ayushkumawat',
     }
   ];
