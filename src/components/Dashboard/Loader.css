@@ -1,0 +1,31 @@
+.loader-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 20, 0.85);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s;
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(236, 33, 70, 0.2);
+  border-top: 5px solid #ec2146;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.2rem;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loader-text {
+  color: #fff;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  text-shadow: 0 0 8px #ec2146;
+} 

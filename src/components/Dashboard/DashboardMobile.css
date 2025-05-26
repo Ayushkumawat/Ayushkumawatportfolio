@@ -1,0 +1,431 @@
+/* Mobile Dashboard Layout */
+.dashboard-mobile-section {
+  width: 100vw;
+  min-height: calc(100vh - var(--navbar-height) - 20px);
+  height: calc(100vh - var(--navbar-height) - 20px);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.dashboard-mobile-content {
+  width: 100vw;
+  max-width: 100vw;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0 !important;
+  min-height: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.mobile-stats-summary-row,
+.mobile-card {
+  min-height: clamp(80px, 22vh, 220px);
+  max-height: 40vh;
+  height: 100%;
+  flex: 1 1 0;
+}
+
+.mobile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(135deg, rgba(30,32,48,0.75) 0%, rgba(40,40,60,0.65) 100%);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.22), 0 2px 8px 0 rgba(236,33,70,0.13);
+  border: 1.5px solid rgba(255,255,255,0.13);
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow: visible;
+  padding: 0 0 1rem 0;
+  margin-bottom: 1.1rem;
+  transition: box-shadow 0.22s, border 0.22s, transform 0.18s;
+  margin-top: 0 !important;
+  color: var(--text-color);
+}
+
+.mobile-card:active, .mobile-card:focus, .mobile-card:hover {
+  box-shadow: 0 12px 40px 0 rgba(236,33,70,0.18), 0 2px 12px 0 rgba(236,33,70,0.18);
+  border: 1.5px solid rgba(236,33,70,0.22);
+}
+
+.mobile-card-chart-content {
+  flex: 1 1 0;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-card-chart-content .chart-container,
+.mobile-card-chart-content .chart-container-doughnut {
+  width: 99% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  flex: 1 1 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: auto !important;
+  max-width: 100% !important;
+}
+
+.mobile-card-chart-content canvas {
+  width: 99% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  flex: 1 1 0 !important;
+  display: block !important;
+  margin: auto !important;
+  max-width: 100% !important;
+}
+
+.mobile-stats-summary-row {
+  width: 100vw;
+  padding: 0;
+  margin: 0 0 0.5rem 0;
+  box-sizing: border-box;
+}
+
+.mobile-stats-summary-row .github-stats-summary {
+  width: 100vw;
+  margin: 0;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.mobile-stat-item {
+  background: rgba(255, 255, 255, 0.13);
+  border: 1.5px solid rgba(255,255,255,0.13);
+  border-radius: 18px;
+  padding: 0.9rem 0.2rem 0.8rem 0.2rem;
+  text-align: center;
+  font-size: clamp(0.85rem, 2.5vh, 1.12rem);
+  color: var(--text-color);
+  min-width: 0;
+  min-height: clamp(30px, 12vh, 100px);
+  max-height: 180px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(236,33,70,0.08);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.2s, transform 0.2s, min-height 0.2s, font-size 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+.mobile-stat-item:active, .mobile-stat-item:focus {
+  box-shadow: 0 2px 8px 0 rgba(236,33,70,0.18), 0 1.5px 6px 0 rgba(236,33,70,0.18);
+}
+.mobile-stat-item h3 {
+  font-size: clamp(0.85rem, 2vh, 1.1rem);
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 0.15rem 0;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 8px rgba(236,33,70,0.08);
+}
+.mobile-stat-item p {
+  font-size: clamp(0.95rem, 2vh, 1.2rem);
+  font-weight: 700;
+  color: var(--main-color);
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(236,33,70,0.08);
+}
+
+.mobile-card:not(.weekly-commits) {
+  padding-bottom: clamp(0.1rem, 1vh, 0.3rem) !important;
+}
+
+.mobile-card.weekly-commits {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  min-height: 120px;
+  max-height: 30vh;
+  flex-shrink: 0;
+}
+
+.mobile-card-title {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+  padding: 0 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: left;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  min-height: 38px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.mobile-card-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--main-color, #ec2146);
+  margin-right: 8px;
+  box-shadow: 0 0 6px var(--main-color, #ec2146);
+}
+
+.mobile-card:first-of-type {
+  margin-top: -1.2rem !important;
+}
+
+@media (max-width: 480px) {
+  .dashboard-mobile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem !important;
+  }
+  .mobile-stats-summary-row {
+    max-width: 380px;
+    width: 96vw;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .mobile-stats-summary-row .mobile-stat-item,
+  .mobile-stats-summary-row .github-stats-summary > * {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0.9rem 0.2rem 0.8rem 0.2rem !important;
+    box-sizing: border-box;
+  }
+  .mobile-card {
+    max-width: 380px;
+    width: 96vw;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+  .mobile-card-title {
+    font-size: clamp(0.9rem, 1.7vh, 1.1rem) !important;
+    margin-bottom: 0.5rem;
+  }
+  .mobile-card-chart-content {
+    border-radius: 10px;
+    padding: 0.2rem 0.05rem 0.2rem 0.05rem;
+    min-height: 0;
+    height: 100%;
+    max-height: none;
+    flex-grow: 1;
+  }
+  .mobile-card-chart-content .chart-container,
+  .mobile-card-chart-content .chart-container-doughnut {
+    border-radius: 10px !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+  .mobile-card-chart-content canvas {
+    border-radius: 8px !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+  .mobile-stat-item h3 {
+    font-size: clamp(0.75rem, 1.6vh, 1rem);
+  }
+  .mobile-stat-item p {
+    font-size: clamp(0.85rem, 1.6vh, 1.1rem);
+  }
+  .mobile-stats-summary-row {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .mobile-stats-summary-row .mobile-stat-item p,
+  .mobile-stats-summary-row .github-stats-summary > * p {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .mobile-card:first-of-type {
+    margin-top: 0 !important;
+  }
+}
+@media (max-width: 480px) and (max-height: 700px) {
+  .mobile-stats-summary-row {
+    margin-top: 1.2rem;
+  }
+}
+@media (max-width: 480px) and (max-height: 600px) {
+  .mobile-stats-summary-row {
+    margin-top: 0.6rem;
+  }
+}
+@media (max-width: 480px) and (max-height: 500px) {
+  .mobile-stats-summary-row {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-card-chart-content {
+    min-height: 160px !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+  .mobile-card-chart-content .chart-container,
+  .mobile-card-chart-content .chart-container-doughnut {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 140px !important;
+    max-height: 220px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    flex: 1 1 0 !important;
+    padding: 0 !important;
+  }
+  .mobile-card-chart-content canvas {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 120px !important;
+    max-height: 220px !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .mobile-card {
+    min-height: 120px !important;
+    flex-shrink: 0 !important;
+  }
+  .mobile-stats-summary-row {
+    flex-shrink: 1 !important;
+  }
+  .mobile-stat-item {
+    min-height: 30px !important;
+    max-height: 60px !important;
+    font-size: 0.85rem !important;
+    padding: 0.3rem 0.1rem 0.2rem 0.1rem !important;
+  }
+  .mobile-stat-item h3 {
+    font-size: 0.9rem !important;
+  }
+  .mobile-stat-item p {
+    font-size: 1rem !important;
+  }
+  .mobile-card.weekly-commits {
+    min-height: 120px !important;
+    flex-shrink: 0 !important;
+  }
+  .mobile-card-title {
+    font-size: 1.05rem !important;
+  }
+  .mobile-card-chart-content {
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: none !important;
+    flex-grow: 1 !important;
+  }
+  .mobile-card-chart-content .chart-container,
+  .mobile-card-chart-content .chart-container-doughnut {
+    min-height: 0 !important;
+    max-height: none !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+  .mobile-card-chart-content canvas {
+    min-height: 0 !important;
+    max-height: none !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+}
+
+@media (max-height: 700px) {
+  .dashboard-mobile-content {
+    gap: 0.2rem !important;
+  }
+}
+
+/* Prevent horizontal scroll */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Make charts fill the card, but not overflow */
+.mobile-card-chart-content,
+.mobile-card-chart-content .chart-container,
+.mobile-card-chart-content .chart-container-doughnut,
+.mobile-card-chart-content canvas {
+  width: 99% !important;
+  margin: auto !important;
+  max-width: 100% !important;
+}
+
+/* Remove any flex/height from chart containers */
+.mobile-card-chart-content .chart-container,
+.mobile-card-chart-content .chart-container-doughnut {
+  display: block !important;
+  height: auto !important;
+  min-height: 120px !important;
+  max-height: 200px !important;
+  padding: 0 !important;
+}
+
+/* Touch-friendly spacing */
+.mobile-card,
+.mobile-stat-item {
+  touch-action: manipulation;
+}
+
+.mobile-card.weekly-commits .mobile-card-chart-content,
+.mobile-card.weekly-commits .mobile-card-chart-content .chart-container,
+.mobile-card.weekly-commits .mobile-card-chart-content .chart-container-doughnut,
+.mobile-card.weekly-commits .mobile-card-chart-content canvas {
+  width: 99% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: auto !important;
+} 

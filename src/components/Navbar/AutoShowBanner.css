@@ -1,0 +1,52 @@
+.auto-show-banner {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--navbar-height));
+  background: none;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.auto-show-banner-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2010;
+  transition: color 0.2s;
+}
+.auto-show-banner-close:hover {
+  color: #ff1744;
+}
+
+.auto-show-banner-content {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .auto-show-banner-content {
+    max-width: 98vw;
+    padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+  }
+  .auto-show-banner-content h4 {
+    font-size: 1.3rem;
+  }
+  .auto-show-banner-content p {
+    font-size: 1.05rem;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+} 

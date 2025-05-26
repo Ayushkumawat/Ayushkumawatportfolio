@@ -1,0 +1,1137 @@
+.about-content{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    font-size: 1rem;
+    padding: 30px 5% 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: auto;
+    max-width: 1800px;
+    justify-content: space-between;
+    gap: 3%;
+    z-index: 1;
+}
+
+.cont i{
+    margin-right: 10px;
+}
+
+.about-content::-webkit-scrollbar{display: none;}
+
+.about-content{
+    .card{
+        display: flex;
+        position: relative;
+        width: 30%;
+        min-width: 350px;
+        max-width: 450px;
+        height: 220px;
+        margin: 20px 0;
+        flex-shrink: 0;
+        box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        background: rgba(31, 36, 45, 0.3);
+        background: linear-gradient(
+            135deg, 
+            rgba(31, 36, 45, 0.35) 0%, 
+            rgba(31, 36, 45, 0.2) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        z-index: 1;
+        align-self: center;
+        margin-top: 50px;
+        overflow: hidden;
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
+.about-content .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 80%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-content{
+    .card h1, .card h2, .card h3, .card h4, .card p, .card img {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* Fix for Safari */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+    .about-content .card {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* Fix for Firefox */
+@-moz-document url-prefix() {
+    .about-content .card {
+        background: rgba(31, 36, 45, 0.7);
+    }
+}
+
+@keyframes anime {
+    100%{
+        transform: translateY(10px);
+    }
+}
+
+.about-content{
+    .card img{
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 50px;
+        height: 45px;
+    }
+}
+
+.about-content{
+    .card h1{
+        position: absolute;
+        top: 35px;
+        left: 25px;
+        color: var(--main-color);
+    }
+}
+
+.about-content{
+    .card h2{
+        position: absolute;
+        top: 80px;
+        left: 26px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-decoration:underline;
+    }
+}
+
+.about-content{
+    .card h3{
+        position: absolute;
+        top: 120px;
+        left: 26px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.about-content{
+    .card h4{
+        position: absolute;
+        top: 135px;
+        left: 26px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.about-content{
+    .card p.contact-info{
+        position: absolute;
+        top: 180px;
+        left: 23px;
+        color: var(--text-color);
+        text-decoration:underline;
+        font-size: 0.85rem;
+        width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0.02rem;
+    }
+}
+
+.cont-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 65%;
+}
+
+.cont {
+    text-align: justify;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.about-content .heading{
+    text-align: left;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin: 0 0 1rem;
+    width: 100%;
+    padding: 0;
+}
+
+.about-content h2{
+    text-align: left;
+    line-height: 1.5;
+}
+
+.about-content p{
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0;
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    line-height: 1.6;
+}
+
+.about-content{
+    .btn {
+        display: block;
+        padding: 0.5rem 1.5rem;
+        color: var(--text-color);
+        background: var(--main-color);
+        border-radius: 4rem;
+        box-shadow: 0 0 0.5rem var(--text-color);
+        width: fit-content;
+        font-size: clamp(1rem, 1.2vw, 1.3rem);
+        letter-spacing: 0.05rem;
+        font-weight: 600;
+        transition: 0.5s ease;
+        margin: 1.5rem 0 1rem;
+        align-self: flex-start;
+        text-decoration: none;
+    }
+}
+.about-content{
+    .btn:hover{
+        box-shadow: none;
+        color: var(--main-color);
+        background-color: var(--text-color);
+    }
+}
+
+@media (min-width: 1600px) {
+    .about-content {
+        padding: 30px 8% 0;
+        gap: 5%;
+    }
+    
+    .about-content .card {
+        width: 25%;
+        min-width: 400px;
+        height: 240px;
+    }
+    
+    .cont-wrapper {
+        max-width: 70%;
+    }
+    
+    .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 1200px) {
+    .about-content {
+        padding: 30px 3% 0;
+    }
+    
+    .about-content .card {
+        min-width: 320px;
+        width: 35%;
+    }
+    
+    .cont-wrapper {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 5% 0;
+    }
+    
+    .about-content .card {
+        width: 90%;
+        max-width: 400px;
+        margin: 10px auto 30px;
+    }
+    
+    .cont-wrapper {
+        max-width: 90%;
+    }
+    
+    .about-content .heading {
+        text-align: center;
+    }
+    
+    .about-content .btn {
+        align-self: center;
+        margin: 2rem auto;
+    }
+}
+
+.aboutme-mobile {
+    margin-top: 0 !important;
+    padding-top: 2rem !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 50 !important;
+    position: relative !important;
+}
+
+/* New class for vertically centered content */
+.aboutme-centered-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    min-height: calc(100vh - var(--navbar-height) - 5rem) !important;
+    padding-bottom: 1rem !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 5% 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+    
+    .about-content .card,
+    .aboutme-mobile .card {
+        width: 90%;
+        min-width: 0;
+        max-width: 400px;
+        margin: 15px 0;
+        height: auto;
+        min-height: 180px;
+    }
+    
+    /* Center the content wrapper vertically between navbar and bottom */
+    .cont-wrapper {
+        max-width: 100%;
+        width: 100%;
+        z-index: 20 !important;
+        height: auto;
+        margin: auto !important;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        flex: 1;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding-top: calc(var(--navbar-height) / 2) !important;
+    }
+    
+    .aboutme-mobile.aboutme-centered-content .cont-wrapper {
+        margin: auto !important;
+    }
+    
+    /* Adjust paragraph for better readability when centered */
+    .aboutme-mobile.aboutme-centered-content .cont p {
+        max-width: 85vw !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: justify !important;
+    }
+    
+    .about-content .card,
+    .aboutme-mobile .card {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 180px;
+        padding-bottom: 60px;
+        margin: 0 0 20px;
+        transform: none !important;
+        transition: none !important;
+        margin-bottom: 2rem !important;
+        background: rgba(31, 36, 45, 0.3);
+        background: linear-gradient(
+            135deg, 
+            rgba(31, 36, 45, 0.35) 0%, 
+            rgba(31, 36, 45, 0.2) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        transform: translateZ(0) !important;
+        z-index: 1;
+    }
+    
+    .aboutme-mobile .card,
+    .aboutme-mobile .cont-wrapper,
+    .aboutme-mobile .heading,
+    .aboutme-mobile p,
+    .aboutme-mobile .btn {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        position: relative !important;
+        z-index: 100 !important;
+    }
+
+    .aboutme-mobile .card::before,
+    .about-content .card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0) 80%
+        );
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .about-content{
+        .card{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 355px;
+            height: auto;
+            min-height: 210px;
+            margin: 0 auto 1rem;
+            padding: 1rem;
+            z-index: 20 !important;
+        }
+    }
+
+    .about-content{
+        .card img{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            margin: 0;
+            width: 40px;
+            height: 35px;
+        }
+    }
+    
+    .about-content{
+        .card h1{
+            position: relative;
+            margin: 0.5rem 0 1.5rem;
+            font-size: 1.8rem;
+            align-self: flex-start;
+            top: auto;
+            left: auto;
+        }
+    }
+
+    .about-content{
+        .card h2{
+            position: relative;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            align-self: flex-start;
+            top: auto;
+            left: auto;
+        }
+    }
+
+    .about-content{
+        .card h3{
+            position: relative;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            align-self: flex-start; 
+            top: auto;
+            left: auto;
+        }
+    }
+
+    .about-content{
+        .card h4{
+            position: relative;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            align-self: flex-start;
+            top: auto;
+            left: auto;
+        }
+    }
+
+    .about-content{
+        .card p.contact-info{
+            position: relative;
+            margin: 0.8rem 0 0;
+            font-size: 0.85rem;
+            align-self: flex-start;
+            top: auto;
+            left: auto;
+            width: 100%;
+            overflow: visible;
+            white-space: normal;
+            word-break: break-word;
+        }
+    }
+
+    .about-content .heading{
+        align-self: center;
+        text-align: center;
+        margin: 1.5rem 0;
+        font-size: 2.2rem;
+    }
+
+    .cont p{
+        margin: 1rem;
+        text-align: justify;
+        line-height: 1.6;
+    }
+
+    .about-content{
+        .btn {
+            align-self: center;
+            margin: 1.5rem auto;
+            font-size: 1.4rem;
+            padding: 0.6rem 1.8rem;
+        }
+    }
+
+    .aboutme-mobile {
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        font-size: 0.97rem !important;
+    }
+    .aboutme-mobile .heading {
+        font-size: 2rem !important;
+        margin: 0.5rem 0 1.5rem !important;
+        text-align: center !important;
+        color: var(--main-color);
+    }
+    .aboutme-mobile .cont p {
+        font-size: clamp(1.1rem, 3vw, 1.25rem) !important;
+        margin: 0.7rem 0 1.5rem !important;
+        text-align: center !important;
+        line-height: 1.6;
+        max-width: 95vw;
+        word-break: break-word;
+        box-sizing: border-box;
+    }
+    .aboutme-mobile .btn {
+        font-size: 1.2rem !important;
+        padding: 0.6rem 1.8rem !important;
+        margin: 1rem auto 2rem !important;
+        display: block !important;
+    }
+
+    @media (max-height: 700px) {
+        .about-content {
+            padding-top: max(3.5rem, calc(1.5rem + 3rem)) !important;
+            justify-content: flex-start !important;
+            padding-bottom: 0.5rem !important;
+        }
+        .cont-wrapper {
+            margin-top: 0.5rem !important;
+        }
+    }
+    
+    @media (max-height: 600px) {
+        .about-content {
+            padding-top: max(3rem, calc(1rem + 2.5rem)) !important;
+            justify-content: flex-start !important;
+            padding-bottom: 0.3rem !important;
+        }
+        .cont-wrapper {
+            margin-top: 0.3rem !important;
+        }
+    }
+    
+    @media (max-height: 500px) {
+        .about-content {
+            padding-top: max(2.5rem, calc(0.5rem + 2rem)) !important;
+            justify-content: flex-start !important;
+            padding-bottom: 0.2rem !important;
+        }
+        .cont-wrapper {
+            margin-top: 0.2rem !important;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-in {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+.delay-1 {
+    transition-delay: 0.1s;
+}
+
+.delay-2 {
+    transition-delay: 0.3s;
+}
+
+.delay-3 {
+    transition-delay: 0.5s;
+}
+
+/* Add new classes for small and very small screens */
+.aboutme-small {
+    font-size: 1rem !important;
+}
+
+.aboutme-small .heading {
+    font-size: 1.6rem !important;
+}
+
+.aboutme-small .cont p {
+    font-size: clamp(0.9rem, 2.7vw, 1rem) !important;
+    line-height: 1.5 !important;
+}
+
+.aboutme-small .btn {
+    font-size: 1.1rem !important;
+    padding: 0.45rem 1.2rem !important;
+}
+
+.aboutme-very-small {
+    font-size: 0.9rem !important;
+}
+
+.aboutme-very-small .heading {
+    font-size: 1.4rem !important;
+}
+
+.aboutme-very-small .cont p {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem) !important;
+    line-height: 1.4 !important;
+}
+
+.aboutme-very-small .btn {
+    font-size: 1rem !important;
+    padding: 0.4rem 1.1rem !important;
+}
+
+/* Dynamic spacing for different screen heights in mobile view */
+@media (max-height: 800px) and (max-width: 768px) {
+    .aboutme-mobile {
+        padding-bottom: 2rem !important;
+    }
+    
+    .aboutme-mobile .btn {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .aboutme-mobile .cont p {
+        font-size: clamp(1rem, 2.8vw, 1.15rem) !important;
+    }
+}
+
+@media (max-height: 650px) and (max-width: 768px) {
+    .aboutme-mobile {
+        padding-bottom: 1rem !important;
+    }
+    
+    .aboutme-mobile .btn {
+        margin-bottom: 1rem !important;
+    }
+    
+    .aboutme-mobile .cont p {
+        font-size: clamp(0.95rem, 2.6vw, 1.05rem) !important;
+        line-height: 1.5 !important;
+    }
+    
+    .aboutme-mobile .heading {
+        font-size: 1.8rem !important;
+        margin: 0.3rem 0 1rem !important;
+    }
+}
+
+@media (max-height: 550px) and (max-width: 768px) {
+    .aboutme-mobile {
+        padding-bottom: 0.5rem !important;
+    }
+    
+    .aboutme-mobile .btn {
+        margin-bottom: 0.5rem !important;
+        font-size: 1.1rem !important;
+        padding: 0.5rem 1.5rem !important;
+    }
+    
+    .aboutme-mobile .cont p {
+        font-size: clamp(0.9rem, 2.4vw, 1rem) !important;
+        line-height: 1.4 !important;
+        margin: 0.5rem 0 1rem !important;
+    }
+    
+    .aboutme-mobile .heading {
+        font-size: 1.6rem !important;
+        margin: 0.2rem 0 0.7rem !important;
+    }
+}
+
+/* Fix for Firefox and other browsers without backdrop-filter support */
+@supports not ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
+    .about-content .card,
+    .aboutme-mobile .card {
+        background: rgba(31, 36, 45, 0.75);
+    }
+    
+    @media(max-width:768px) {
+        .about-content .card,
+        .aboutme-mobile .card {
+            background: rgba(31, 36, 45, 0.75);
+        }
+    }
+}
+
+/* Firefox-specific fix */
+@-moz-document url-prefix() {
+    .about-content .card,
+    .aboutme-mobile .card {
+        background: rgba(31, 36, 45, 0.75);
+    }
+}
+
+/* Height-based styling classes for mobile */
+.aboutme-short {
+    /* Styles for shorter screens */
+    padding-top: 3.5rem !important;
+}
+
+.aboutme-short .heading {
+    font-size: 1.7rem !important;
+    margin: 0.3rem 0 0.8rem !important;
+}
+
+.aboutme-short .cont p {
+    line-height: 1.5 !important;
+    margin: 0.5rem 0 1rem !important;
+}
+
+.aboutme-short .btn {
+    font-size: 1.1rem !important;
+    padding: 0.5rem 1.5rem !important;
+    margin: 0.8rem auto 1.2rem !important;
+}
+
+.aboutme-very-short {
+    /* Styles for very short screens */
+    padding-top: 3rem !important;
+}
+
+.aboutme-very-short .heading {
+    font-size: 1.5rem !important;
+    margin: 0.2rem 0 0.6rem !important;
+}
+
+.aboutme-very-short .cont p {
+    line-height: 1.4 !important;
+    margin: 0.4rem 0 0.8rem !important;
+}
+
+.aboutme-very-short .btn {
+    font-size: 1rem !important;
+    padding: 0.4rem 1.2rem !important;
+    margin: 0.6rem auto 1rem !important;
+}
+
+/* Override for combined dimensions */
+@media (max-height: 600px) and (max-width: 480px) {
+    .about-content.aboutme-mobile.aboutme-small.aboutme-short,
+    .about-content.aboutme-mobile.aboutme-small.aboutme-very-short,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-short,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-very-short {
+        padding-top: 2.5rem !important;
+    }
+    
+    .about-content.aboutme-mobile.aboutme-small.aboutme-short .cont p,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-short .cont p {
+        font-size: clamp(0.85rem, 2.4vw, 0.95rem) !important;
+        line-height: 1.35 !important;
+        margin: 0.3rem 0 0.6rem !important;
+    }
+    
+    .about-content.aboutme-mobile.aboutme-small.aboutme-very-short .cont p,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-very-short .cont p {
+        font-size: clamp(0.8rem, 2.2vw, 0.9rem) !important;
+        line-height: 1.3 !important;
+        margin: 0.2rem 0 0.4rem !important;
+    }
+    
+    .about-content.aboutme-mobile.aboutme-small.aboutme-short .heading,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-short .heading {
+        font-size: 1.4rem !important;
+        margin: 0.2rem 0 0.5rem !important;
+    }
+    
+    .about-content.aboutme-mobile.aboutme-small.aboutme-very-short .heading,
+    .about-content.aboutme-mobile.aboutme-very-small.aboutme-very-short .heading {
+        font-size: 1.3rem !important;
+        margin: 0.1rem 0 0.4rem !important;
+    }
+}
+
+/* Mobile AboutMe spacing */
+.about-sections-stack .about-content.aboutme-mobile {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.about-sections-stack .about-content.aboutme-mobile .cont-wrapper {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    padding-top: 0 !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* AboutMe card for mobile view - similar to home page card */
+.aboutme-card {
+  text-align: justify;
+  position: relative;
+  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  background: rgba(31, 36, 45, 0.3);
+  background: linear-gradient(
+      135deg, 
+      rgba(31, 36, 45, 0.35) 0%, 
+      rgba(31, 36, 45, 0.2) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  margin: 1vh auto;
+  width: 90%;
+  max-width: 600px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0);
+  will-change: transform;
+  padding: 1rem 0.8rem;
+  transition: backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+}
+
+.aboutme-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 80%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aboutme-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+.aboutme-card-content p {
+  text-align: justify !important;
+  margin: 0.8rem 0 1.5rem !important;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+  line-height: 1.6 !important;
+  color: var(--text-color);
+  padding: 0 0.2rem;
+}
+
+.aboutme-card .btn {
+  margin: 0.5rem auto 0.8rem !important;
+}
+
+/* Fix for Firefox and other browsers without backdrop-filter support */
+@supports not ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
+  .aboutme-card {
+      background: rgba(31, 36, 45, 0.75);
+  }
+}
+
+/* Firefox-specific fix */
+@-moz-document url-prefix() {
+  .aboutme-card {
+      background: rgba(31, 36, 45, 0.75);
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-height: 650px) {
+  .aboutme-card {
+    padding: 0.8rem 0.6rem;
+    margin: 0.5vh auto;
+  }
+  
+  .aboutme-card-content p {
+    margin: 0.5rem 0 1rem !important;
+    font-size: clamp(0.85rem, 2.3vw, 1rem) !important;
+    line-height: 1.5 !important;
+  }
+  
+  .aboutme-card .btn {
+    margin: 0.3rem auto 0.5rem !important;
+    font-size: 1.1rem !important;
+    padding: 0.5rem 1.5rem !important;
+  }
+}
+
+@media (max-height: 550px) {
+  .aboutme-card {
+    padding: 0.7rem 0.5rem;
+    margin: 0.3vh auto;
+  }
+  
+  .aboutme-card-content p {
+    margin: 0.3rem 0 0.7rem !important;
+    font-size: clamp(0.8rem, 2.1vw, 0.9rem) !important;
+    line-height: 1.4 !important;
+  }
+  
+  .aboutme-card .btn {
+    margin: 0.2rem auto 0.3rem !important;
+    font-size: 1rem !important;
+    padding: 0.4rem 1.2rem !important;
+  }
+}
+
+/* Override for smaller screens to ensure content fits properly */
+@media (max-width: 380px) {
+  .aboutme-card {
+    width: 95% !important;
+    padding: 0.8rem 0.5rem !important;
+    margin: 0.5rem auto !important;
+  }
+  
+  .aboutme-card-content {
+    padding: 0 !important;
+  }
+  
+  .aboutme-card-content p {
+    font-size: clamp(0.7rem, 2vw, 0.85rem) !important;
+    line-height: 1.3 !important;
+    margin: 0.5rem 0 0.8rem !important;
+    padding: 0 !important;
+  }
+  
+  .aboutme-card .btn {
+    font-size: 0.9rem !important;
+    padding: 0.35rem 1rem !important;
+    margin: 0.2rem auto 0.4rem !important;
+  }
+}
+
+/* Extra small screens additional fixes */
+@media (max-width: 330px) {
+  .about-sections-stack {
+    padding-top: 3.5rem !important;
+  }
+
+  .aboutme-card {
+    width: 92% !important;
+    padding: 0.6rem 0.4rem !important;
+    margin: 0 auto !important;
+  }
+  
+  .aboutme-card-content p {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+    margin: 0.3rem 0 0.6rem !important;
+  }
+  
+  .aboutme-card .btn {
+    font-size: 0.8rem !important;
+    padding: 0.3rem 0.8rem !important;
+    margin: 0.1rem auto 0.3rem !important;
+  }
+}
+
+/* Extra small screen specific class */
+.aboutme-card-xs {
+  width: 92% !important;
+  margin: 0 auto !important;
+  padding: 0.6rem 0.4rem !important;
+}
+
+.aboutme-card-xs .aboutme-card-content {
+  padding: 0 !important;
+}
+
+.aboutme-card-xs .aboutme-card-content p {
+  font-size: 0.7rem !important;
+  line-height: 1.3 !important;
+  margin: 0.3rem 0 0.6rem !important;
+  padding: 0 !important;
+}
+
+/* Adjustments for SectionNavBar spacing on small screens */
+@media (max-width: 360px) {
+  .about-sections-stack {
+    padding-top: 1rem !important;
+  }
+}
+
+/* Ensure vertical centering works on very small screens */
+@media (max-height: 600px) and (max-width: 360px) {
+  .about-sections-stack {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: calc(100vh - 3.5rem) !important;
+  }
+  
+  .aboutme-card {
+    margin-top: 0 !important;
+  }
+}
+
+/* Animation enhancements for lazy loading */
+.aboutme-card {
+  transition: backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    backdrop-filter: blur(0px);
+  }
+  50% {
+    backdrop-filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    backdrop-filter: blur(3px);
+  }
+}
+
+@keyframes cardGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Section nav bar animation enhancements */
+.section-nav-bar {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes navBarReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+.section-nav-dot {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.section-nav-dot:hover {
+  transform: scale(1.1);
+}

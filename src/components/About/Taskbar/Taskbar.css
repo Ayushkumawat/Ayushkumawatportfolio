@@ -1,0 +1,332 @@
+/* Taskbar container */
+.task-bar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 0;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  height: auto;
+  max-height: 80px;
+  margin-top: 20px;
+}
+
+/* Compact screen adjustment */
+.task-bar.compact-screen {
+  margin-top: 0 !important;
+  transform: translateY(-20px); /* Use transform instead of absolute positioning */
+}
+
+/* Responsive height adjustments */
+@media (max-height: 900px) {
+  .task-bar {
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media (max-height: 800px) {
+  .task-bar {
+    top: calc(var(--navbar-height) - 45px);
+    transform: translateY(-20px);
+    padding: 8px 0;
+  }
+}
+
+@media (max-height: 750px) {
+  .task-bar {
+    margin-bottom: 0.4rem;
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-height: 700px) {
+  .task-bar {
+    top: calc(var(--navbar-height) - 50px);
+    transform: translateY(-25px);
+    padding: 5px 0;
+  }
+}
+
+@media (max-height: 600px) {
+  .task-bar {
+    top: calc(var(--navbar-height) - 55px);
+    transform: translateY(-30px);
+    padding: 3px 0;
+  }
+  
+  /* Slightly smaller taskbar for very small height screens */
+  .taskbar-nav {
+    height: 45px !important;
+  }
+  
+  .taskbar-button {
+    line-height: 43px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* Very small screens adjustments */
+@media (max-height: 520px) {
+  .taskbar-nav {
+    height: 40px !important;
+  }
+  
+  .taskbar-button {
+    line-height: 38px !important;
+    font-size: 14px !important;
+    padding: 0 0.8rem !important;
+  }
+}
+
+.task-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.dsply {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+}
+
+/* Taskbar navigation */
+.taskbar-nav {
+  position: relative;
+  display: flex;
+  width: clamp(600px, 80vw, 821px);
+  height: 53px;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--text-color);
+  border-left: 1px solid var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Taskbar buttons */
+.taskbar-button {
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--main-color);
+  line-height: 50px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  pointer-events: auto;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.taskbar-button:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-button.active {
+  background-color: var(--main-color);
+  color: var(--text-color);
+  transition: 0.5s;
+}
+
+.taskbar-button:hover {
+  color: var(--text-color);
+  background-color: rgba(0, 238, 255, 0.1);
+}
+
+/* Underline animation - Dynamic positioning */
+.taskbar-animation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--text-color);
+  transition: all 0.5s ease;
+  z-index: 2 !important;
+}
+
+/* Button positions - These are now calculated dynamically in JS */
+.start-abou { width: 25%; left: 0; }
+.start-time { width: 25%; left: 25%; }
+.start-achive { width: 25%; left: 50%; }
+.start-cert { width: 25%; left: 75%; }
+
+/* Large screens */
+@media (min-width: 1600px) {
+  .taskbar-nav {
+    width: clamp(821px, 60vw, 1000px);
+    height: 60px;
+  }
+  
+  .taskbar-button {
+    line-height: 58px;
+    font-size: 22px;
+  }
+}
+
+/* Medium screens */
+@media (max-width: 1200px) {
+  .taskbar-nav {
+    width: clamp(600px, 90vw, 821px);
+  }
+  
+  .taskbar-button {
+    padding: 0 clamp(0.8rem, 1.5vw, 1.5rem);
+  }
+}
+
+/* Small desktops */
+@media (max-width: 1024px) and (min-width: 999px) {
+  .taskbar-nav {
+    width: clamp(550px, 95vw, 600px);
+    height: 48px;
+  }
+  
+  .taskbar-button {
+    line-height: 46px;
+    font-size: 16px;
+    padding: 0 clamp(0.6rem, 1vw, 1rem);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 998px) {
+  .task-bar {
+    position: relative;
+    top: 0;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .taskbar-nav {
+    width: 100%;
+    max-width: 821px;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .taskbar-button {
+    font-size: 16px;
+    padding: 0 1rem;
+    line-height: 40px;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .taskbar-button:not(:last-child)::after {
+    display: none;
+  }
+}
+
+/* Animation classes */
+.taskbar-hidden {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.taskbar-slide-up {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.taskbar-slide-down {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.taskbar-visible {
+  animation: taskbarFadeIn 0.5s ease forwards;
+}
+
+.button-animate {
+  opacity: 0;
+  animation-name: buttonPopIn;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+
+/* Button animation delays */
+.button-delay-0 { animation-delay: 0.1s; }
+.button-delay-1 { animation-delay: 0.2s; }
+.button-delay-2 { animation-delay: 0.3s; }
+.button-delay-3 { animation-delay: 0.4s; }
+
+/* Animation keyframes */
+@keyframes taskbarFadeIn {
+  from {
+    backdrop-filter: blur(0);
+    background: rgba(255, 255, 255, 0);
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Underline animation */
+.taskbar-slide-up .taskbar-animation,
+.taskbar-slide-down .taskbar-animation {
+  animation: fadeInUnderline 0.6s ease 0.3s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUnderline {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Adjust content area to make room for fixed taskbar */
+/* .taskbar-spacer { */
+  /* height: 70px; */
+  /* width: 100%; */
+  /* margin-top: -30px; */ /* Negative margin to compensate for upward taskbar movement */
+/* } */
+
+/* Add shadow for desktop screens */
+@media (min-width: 1000px) {
+  .taskbar-nav {
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.18), 0 1.5px 6px 0 rgba(0,0,0,0.10);
+  }
+}
