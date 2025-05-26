@@ -98,7 +98,7 @@ export default function Contacts() {
   };
 
   return (
-    <section id="contact" className="contact_section">
+    <section id="contact" className="contact">
       <div className="background-shapes">
         <div className="shape shape1"></div>
         <div className="shape shape2"></div>
