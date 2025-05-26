@@ -103,106 +103,99 @@ export default function Contacts() {
         <div className="shape shape2"></div>
       </div>
       
-      <motion.div 
-        className="contact-outer_container"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1 variants={itemVariants} className="contact-title">
-          Get in <span>Touch</span>
-        </motion.h1>
-        
-        <motion.p variants={itemVariants} className="contact-subtitle">
-          Let's discuss how we can work together to bring your ideas to life
-        </motion.p>
+      <motion.h1 variants={itemVariants} className="contact-title">
+        Get in <span>Touch</span>
+      </motion.h1>
+      
+      <motion.p variants={itemVariants} className="contact-subtitle">
+        Let's discuss how we can work together to bring your ideas to life
+      </motion.p>
 
-        <div className="contact-content">
-          <motion.div variants={itemVariants} className="contact-info">
-            <div className="contact-methods">
-              {contactMethods.map((method) => (
-                <motion.a
-                  key={method.id}
-                  href={method.link}
-                  className="contact-card glass-card"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <img src={method.iconSrc} alt={`${method.title} icon`} className="contact-icon" />
-                  <div className="text-content">
-                    <h3>{method.title}</h3>
-                    <p>{method.description}</p>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+      <div className="contact-content">
+        <motion.div variants={itemVariants} className="contact-info">
+          <div className="contact-methods">
+            {contactMethods.map((method) => (
+              <motion.a
+                key={method.id}
+                href={method.link}
+                className="contact-card glass-card"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img src={method.iconSrc} alt={`${method.title} icon`} className="contact-icon" />
+                <div className="text-content">
+                  <h3>{method.title}</h3>
+                  <p>{method.description}</p>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
 
-          <motion.form 
-            variants={itemVariants}
-            className="contact-form glass-card"
-            onSubmit={handleSubmit}
-          >
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="Subject"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-            <div className="form-group">
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your Message"
-                required
-                disabled={isSubmitting}
-              ></textarea>
-            </div>
-            <motion.button
-              type="submit"
-              className={`submit-btn ${isSubmitting ? 'submitting' : ''} ${submitStatus ? `submit-${submitStatus}` : ''}`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <motion.form 
+          variants={itemVariants}
+          className="contact-form glass-card"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              required
               disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent!' : submitStatus === 'error' ? 'Try Again' : 'Send Message'}
-            </motion.button>
-            {submitStatus === 'error' && (
-              <p className="error-message">Failed to send message. Please try again.</p>
-            )}
-          </motion.form>
-        </div>
-      </motion.div>
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your Email"
+              required
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              placeholder="Subject"
+              required
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Your Message"
+              required
+              disabled={isSubmitting}
+            ></textarea>
+          </div>
+          <motion.button
+            type="submit"
+            className={`submit-btn ${isSubmitting ? 'submitting' : ''} ${submitStatus ? `submit-${submitStatus}` : ''}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent!' : submitStatus === 'error' ? 'Try Again' : 'Send Message'}
+          </motion.button>
+          {submitStatus === 'error' && (
+            <p className="error-message">Failed to send message. Please try again.</p>
+          )}
+        </motion.form>
+      </div>
     </section>
   );
 }
