@@ -139,7 +139,7 @@ export default function Contacts() {
   };
 
   return (
-    <section id="contact" className="contact_section" ref={contactRef}>
+    <section id="contact" className="contact" ref={contactRef}>
       <div className="background-shapes">
         <div className="shape shape1"></div>
         <div className="shape shape2"></div>
