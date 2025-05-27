@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Contacts.css';
 
@@ -15,6 +15,23 @@ export default function Contacts() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [initialized, setInitialized] = useState(false);
+  const contactRef = useRef(null);
+
+  // Lazy loading initialization
+  useEffect(() => {
+    const section = contactRef.current;
+    if (!section) return;
+    
+    const observer = new IntersectionObserver(entries => {
+      const entry = entries[0];
+      if (entry.isIntersecting) setInitialized(true);
+      else setInitialized(false);
+    }, { threshold: 0.1 });
+    
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -81,7 +98,8 @@ export default function Contacts() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.2,
+        delayChildren: 0.1
       }
     }
   };
@@ -92,18 +110,47 @@ export default function Contacts() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5
+        duration: 0.3
+      }
+    }
+  };
+
+  const socialContainerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const formVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        delay: 0.6 // Reduced delay for form appearance
       }
     }
   };
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact_section" ref={contactRef}>
       <div className="background-shapes">
         <div className="shape shape1"></div>
         <div className="shape shape2"></div>
       </div>
       
+      <motion.div 
+        className="contact-outer_container"
+        variants={containerVariants}
+        initial="hidden"
+        animate={initialized ? "visible" : "hidden"}
+      >
       <motion.h1 variants={itemVariants} className="contact-title">
         Get in <span>Touch</span>
       </motion.h1>
@@ -112,12 +159,19 @@ export default function Contacts() {
         Let's discuss how we can work together to bring your ideas to life
       </motion.p>
 
+        {initialized && (
       <div className="contact-content">
-        <motion.div variants={itemVariants} className="contact-info">
+            <motion.div 
+              variants={socialContainerVariants}
+              initial="hidden"
+              animate="visible"
+              className="contact-info"
+            >
           <div className="contact-methods">
             {contactMethods.map((method) => (
               <motion.a
                 key={method.id}
+                    variants={itemVariants}
                 href={method.link}
                 className="contact-card glass-card"
                 target="_blank"
@@ -136,7 +190,9 @@ export default function Contacts() {
         </motion.div>
 
         <motion.form 
-          variants={itemVariants}
+              variants={formVariants}
+              initial="hidden"
+              animate="visible"
           className="contact-form glass-card"
           onSubmit={handleSubmit}
         >
@@ -197,6 +253,8 @@ export default function Contacts() {
           )}
         </motion.form>
       </div>
+        )}
+      </motion.div>
     </section>
   );
 }
